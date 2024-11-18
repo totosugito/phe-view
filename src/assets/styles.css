@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.my-dialog-title {
+    @apply sm:text-2xl text-lg font-semibold
+}
+.my-dialog-desc {
+    @apply sm:text-base text-sm p-3
+}
+
+.my-btn-confirm {
+    @apply btn btn-primary btn-sm
+}
+.my-btn-cancel {
+    @apply btn btn-primary btn-sm btn-outline border-neutral-500
+}
