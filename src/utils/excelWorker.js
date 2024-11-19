@@ -181,7 +181,7 @@ self.onmessage = function (e) {
     // get the data
     const jsonData = [];
     for (let row = rowStart; row <= rowEnd; row++) {
-      const rowData = [];
+      const rowData = {};
       let iCol = 0
       for (let col = colStart; col <= colEnd; col++) {
         const cellAddress = XLSX.utils.encode_cell({r: row, c: col});
@@ -193,13 +193,13 @@ self.onmessage = function (e) {
         } else {
           v = cell ? cell.v : undefined
         }
-        rowData.push(v); // Get cell value or empty string
+        rowData[col.toString()] = v; // Get cell value or empty string
 
         iCol += 1;
       }
 
       // skip the data when AREA is empty
-      if (rowData[0] === undefined) {
+      if (rowData["0"] === undefined) {
         continue;
       }
 
@@ -227,7 +227,6 @@ self.onmessage = function (e) {
       tops: topData
     }
     console.log(obj)
-    console.log(jsonData[0])
 
     // Send the parsed data back to the main thread
     self.postMessage({status: "success", data: {data: jsonData, summary: obj}});
