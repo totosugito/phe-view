@@ -8,7 +8,9 @@ const localeId = {
       confirm: 'Confirm',
       close: 'Close',
     },
-    widget: {
+    components: {
+      rowsPerPage: "Baris per halaman",
+      noData: "Tidak ada data"
     }
   }
 }

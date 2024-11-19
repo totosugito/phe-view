@@ -1,7 +1,94 @@
 import * as XLSX from "xlsx";
-import {excelDateToJSDate} from "./utils.js";
+import {excelDateToJSDate} from "./MyUtils.js";
 
-function groupAndSummarize(data, parentIndex, groupIndex, startCol, endCol) {
+function areaSummary(data) {
+  // Initialize an empty object to store the summary
+  const aggregatedSummary = {};
+
+  // Iterate through each entry in the data
+  data.forEach(entry => {
+    const { summary } = entry;
+
+    // Iterate through each key in the summary
+    Object.keys(summary).forEach(key => {
+      // If the key is not already in the aggregated summary, initialize it
+      if (!aggregatedSummary[key]) {
+        aggregatedSummary[key] = {
+          sum: 0,
+          count: 0,
+          valid: 0,
+          min: Infinity,
+          max: -Infinity
+        };
+      }
+
+      // Aggregate the values for this key
+      aggregatedSummary[key].sum += summary[key].sum;
+      aggregatedSummary[key].count += summary[key].count;
+      aggregatedSummary[key].valid += summary[key].valid;
+      aggregatedSummary[key].min = Math.min(aggregatedSummary[key].min, summary[key].min);
+      aggregatedSummary[key].max = Math.max(aggregatedSummary[key].max, summary[key].max);
+    });
+  });
+
+  // Calculate the averages for each key
+  Object.keys(aggregatedSummary).forEach(key => {
+    const { sum, valid } = aggregatedSummary[key];
+    aggregatedSummary[key].avg = valid > 0 ? sum / valid : 0;
+  });
+
+  return aggregatedSummary;
+}
+
+
+function areaGroupAndSummarize(data) {
+  // Group data by area
+  const groupedByArea = data.reduce((acc, entry) => {
+    const { area, summary } = entry;
+
+    if (!acc[area]) {
+      acc[area] = {
+        area,
+        count: 1,
+        summary: {}
+      };
+    } else {
+      acc[area].count += 1;
+    }
+
+    // Merge summary for keys "3" to "11"
+    for (const key in summary) {
+      if (!acc[area].summary[key]) {
+        acc[area].summary[key] = {
+          sum: 0,
+          count: 0,
+          valid: 0,
+          min: Infinity,
+          max: -Infinity
+        };
+      }
+
+      acc[area].summary[key].sum += summary[key].sum;
+      acc[area].summary[key].count += summary[key].count;
+      acc[area].summary[key].valid += summary[key].valid;
+      acc[area].summary[key].min = Math.min(acc[area].summary[key].min, summary[key].min);
+      acc[area].summary[key].max = Math.max(acc[area].summary[key].max, summary[key].max);
+    }
+
+    return acc;
+  }, {});
+
+  // Finalize summary: calculate averages and convert to array format
+  return Object.values(groupedByArea).map(areaSummary => {
+    for (const key in areaSummary.summary) {
+      const { sum, valid } = areaSummary.summary[key];
+      areaSummary.summary[key].avg = valid > 0 ? sum / valid : 0;
+    }
+    return areaSummary;
+  });
+}
+
+function wellGroupAndSummarize(data, parentIndex, groupIndex, startCol, endCol) {
   // Group the data by the specified column
   const groupedData = data.reduce((acc, row, index) => {
     const name = row[groupIndex]; // Group key
@@ -15,7 +102,7 @@ function groupAndSummarize(data, parentIndex, groupIndex, startCol, endCol) {
   }, {});
 
   // Generate the summary for each group
-  return Object.keys(groupedData).map(name => {
+  const results = Object.keys(groupedData).map(name => {
     const group = groupedData[name];
     const summary = {};
 
@@ -40,7 +127,32 @@ function groupAndSummarize(data, parentIndex, groupIndex, startCol, endCol) {
       summary
     };
   });
+  return(results)
 }
+
+function filterTopBySummary(data, count) {
+  // Collect all unique keys from all summaries
+  const allKeys = [...new Set(data.flatMap(entry => Object.keys(entry.summary)))];
+
+  // Prepare result object
+  const result = {};
+
+  // Process each key
+  allKeys.forEach(key => {
+    // Filter and sort entries by the current key's `max` value
+    result[key] = data
+      .filter(entry => entry.summary[key]) // Ensure the key exists
+      .sort((a, b) => b.summary[key].max - a.summary[key].max) // Sort by max descending
+      .slice(0, count) // Take top 5
+      .map(entry => ({
+        ...entry,
+        summary: entry.summary[key] // Include only the current key in summary
+      })); // Assign the top 5 to the result for the current key
+  });
+
+  return result;
+}
+
 
 self.onmessage = function (e) {
   const {fileContent, xlsxRowStart, xlsxRowEnd, xlsxColStart, xlsxColEnd} = e.data;
@@ -99,23 +211,28 @@ self.onmessage = function (e) {
     const groupIndex = 2; // Well Name
     const startCol = 3; // Start column for summary
     const endCol = 11; // End column for summary
-    const wellSummary = groupAndSummarize(jsonData, parentIndex, groupIndex, startCol, endCol);
+    const wellSummary = wellGroupAndSummarize(jsonData, parentIndex, groupIndex, startCol, endCol);
+    const areas = areaGroupAndSummarize(wellSummary);
+    const areasSummary = areaSummary(areas);
+    const topData = filterTopBySummary(wellSummary, 5);
 
     // ------------ create area summary ------------
-
     const obj = {
       columns: columns,
-      area: [],
-      well: wellSummary,
-      stats: {}
+      areas: {
+        data: areas,
+        summary: areasSummary
+      },
+      wells: wellSummary,
+      tops: topData
     }
-    console.log(jsonData)
     console.log(obj)
+    console.log(jsonData[0])
 
     // Send the parsed data back to the main thread
-    self.postMessage({status: "success", data: jsonData});
+    self.postMessage({status: "success", data: {data: jsonData, summary: obj}});
   } catch (error) {
-    console.log("errror")
+    console.log("error")
     self.postMessage({status: "error", error: error.message});
   }
 };

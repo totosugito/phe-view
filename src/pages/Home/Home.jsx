@@ -4,11 +4,14 @@ import {useEffect, useState} from "react";
 import AppNavbar from "./view/AppNavbar.jsx";
 import Worker from "../../utils/excelWorker?worker";
 import {toast} from "react-hot-toast";
+import TabAreaSummary from "./view/TabAreaSummary.jsx";
+import TabWellSummary from "src/pages/Home/view/TabWellSummary.jsx";
 
 const Dashboard = () => {
   const [loading, setLoading] = useState(false);
+  const [activeTab, setActiveTab] = useState(1);
   const [selectedFile, setSelectedFile] = useState(null);
-  const [data, setData] = useState([]);
+  const [data, setData] = useState(null);
   const [error, setError] = useState("");
   const [xlsxRowStart, setXlsxRowStart] = useState(7);
   const [xlsxRowEnd, setXlsxRowEnd] = useState(100000);
@@ -26,7 +29,8 @@ const Dashboard = () => {
       }
     }
 
-    fetchExcelFile().then(r => {});
+    fetchExcelFile().then(r => {
+    });
   }, []);
 
   const onScanFile = (file) => {
@@ -44,11 +48,11 @@ const Dashboard = () => {
       setError("");
 
       // Send the file content to the worker
-      worker.postMessage({ fileContent, xlsxRowStart, xlsxRowEnd, xlsxColStart, xlsxColEnd });
+      worker.postMessage({fileContent, xlsxRowStart, xlsxRowEnd, xlsxColStart, xlsxColEnd});
 
       // Handle messages from the worker
       worker.onmessage = function (event) {
-        const { status, data, error } = event.data;
+        const {status, data, error} = event.data;
 
         if (status === "success") {
           setData(data); // Set the processed data
@@ -74,12 +78,34 @@ const Dashboard = () => {
     }
   };
 
+  const handleTabClick = (index) => {
+    setActiveTab(index);
+  };
+
   return (
     <div className={"h-screen flex flex-col"}>
       <AppNavbar onImportClick={onImportClick}/>
       {loading ? <WebLoading/> :
         <BodyContents>
-          Home
+          <div className="tabs tabs-boxed">
+            <a className={`tab tab-bordered ${activeTab === 0 ? 'tab-active font-bold' : ''}`} onClick={() => handleTabClick(0)}>
+              Area Summary
+            </a>
+            <a className={`tab tab-bordered ${activeTab === 1 ? 'tab-active font-bold' : ''}`} onClick={() => handleTabClick(1)}>
+              Well Summary
+            </a>
+          </div>
+
+          {data &&
+            <div className="bordered p-2">
+              <div className={activeTab === 0 ? '' : 'hidden'}>
+                {/*<TabAreaSummary values={data?.summary ?? {}}/>*/}
+              </div>
+              <div className={activeTab === 1 ? '' : 'hidden'}>
+                <TabWellSummary values={data?.summary?.wells ?? []} raw={data?.data ??[]}/>
+              </div>
+            </div>
+          }
         </BodyContents>
       }
       <AppFooter/>

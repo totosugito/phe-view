@@ -15,3 +15,7 @@
 .my-btn-cancel {
     @apply btn btn-primary btn-sm btn-outline border-neutral-500
 }
+
+.my-card-container {
+    @apply card border w-full p-3 shadow-sm
+}
