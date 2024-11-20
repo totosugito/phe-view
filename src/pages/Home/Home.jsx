@@ -21,8 +21,8 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchExcelFile = async () => {
       try {
-        // const response = await fetch("/data/Wells_1Okt24-15Nov24-mini.xlsx");
-        const response = await fetch("/data/Wells_1Okt24-15Nov24.xlsx");
+        const response = await fetch("/data/Wells_1Okt24-15Nov24-mini.xlsx");
+        // const response = await fetch("/data/Wells_1Okt24-15Nov24.xlsx");
         const blob = await response.blob();
         onScanFile(blob);
       } catch (error) {

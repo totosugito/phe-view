@@ -51,9 +51,12 @@ const TopAreaByKey = ({ values, height="300px", borderRadius=0, keyPlot="sum",
   useEffect(() => {
     let data_ = [];
     let labels_ = [];
+
     if (values) {
-      for(let i=0; i<values.length; i++) {
-        let item = values[i];
+      // Sort the data by summary.sum
+      const sorted = values.sort((a, b) => (b.summary[keyPlot] ?? 0) - (a.summary[keyPlot] ?? 0));
+      for(let i=0; i<sorted.length; i++) {
+        let item = sorted[i];
         labels_.push(item["well"]);
         data_.push(item?.summary[keyPlot] ?? 0);
       }
