@@ -9,7 +9,7 @@ import TabWellSummary from "src/pages/Home/view/TabWellSummary.jsx";
 
 const Dashboard = () => {
   const [loading, setLoading] = useState(false);
-  const [activeTab, setActiveTab] = useState(1);
+  const [activeTab, setActiveTab] = useState(0);
   const [selectedFile, setSelectedFile] = useState(null);
   const [data, setData] = useState(null);
   const [error, setError] = useState("");
@@ -21,7 +21,8 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchExcelFile = async () => {
       try {
-        const response = await fetch("/data/Wells_1Okt24-15Nov24-mini.xlsx"); // Fetch the file from public folder
+        // const response = await fetch("/data/Wells_1Okt24-15Nov24-mini.xlsx");
+        const response = await fetch("/data/Wells_1Okt24-15Nov24.xlsx");
         const blob = await response.blob();
         onScanFile(blob);
       } catch (error) {
@@ -99,7 +100,7 @@ const Dashboard = () => {
           {data &&
             <div className="bordered p-2">
               <div className={activeTab === 0 ? '' : 'hidden'}>
-                {/*<TabAreaSummary values={data?.summary ?? {}}/>*/}
+                <TabAreaSummary values={data?.summary ?? {}}/>
               </div>
               <div className={activeTab === 1 ? '' : 'hidden'}>
                 <TabWellSummary values={data?.summary?.wells ?? []} raw={data?.data ??[]}/>

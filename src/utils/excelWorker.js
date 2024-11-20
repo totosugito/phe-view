@@ -226,7 +226,7 @@ self.onmessage = function (e) {
       wells: wellSummary,
       tops: topData
     }
-    console.log(obj)
+    // console.log(obj)
 
     // Send the parsed data back to the main thread
     self.postMessage({status: "success", data: {data: jsonData, summary: obj}});

@@ -5,7 +5,7 @@ import {
 } from "chart.js";
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import annotationPlugin from 'chartjs-plugin-annotation';
-
+import 'chartjs-adapter-date-fns';
 export const defaultBarThickness = 60;
 export const defaultBarPercentage = 0.5;
 export const defaultChartOptions = {

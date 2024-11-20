@@ -3,6 +3,7 @@ import FilterView from "src/pages/Home/well/FilterView.js";
 import WellCardSummary from "src/pages/Home/well/WellCardSummary.jsx";
 import TableWell from "src/pages/Home/well/TableWell.jsx";
 import ChartLineView from "src/pages/Home/well/ChartLineView.js";
+import {COLORS_LIST} from "src/constants/config.js";
 
 const TabWellSummary = memo(({raw, values}) => {
   const [filterDropdown, setFilterDropdown] = useState(null);
@@ -32,20 +33,30 @@ const TabWellSummary = memo(({raw, values}) => {
       data_.push(raw[i]);
     }
     setData(data_);
-    console.log(data_)
   }
 
   return(
     <div className={"flex flex-col gap-3"}>
       {filterDropdown && <FilterView values={filterDropdown} onChange={filterOnChange}/>}
+      <div className={"text-center text-2xl font-bold text-primary my-3"}>{well?.well}</div>
       {well && <WellCardSummary values={well}/>}
-      {data && <div>
+      {data && <div className={"flex flex-col gap-3"}>
 
         <div className={styleRowGroup}>
-          <ChartLineView values={data ?? []} title={"Top 5 Wells by Total Actual Water"}
-                        keyPlot={"sum"} xlabel={"Total Actual Water (bbl)"} ylabel={"Well"} barColor={"purple"}/>
-          {/*<TopAreaByKey values={values?.tops["5"] ?? []} title={"Top 5 Wells by Total Actual Gas"}*/}
-          {/*              keyPlot={"sum"} xlabel={"Total Actual Gas (MCF)"} ylabel={"Well"} barColor={"green"}/>*/}
+          <ChartLineView values={data ?? []} title={"Time vs Oil (bbl)"}
+                         xlabel={"Time"} ylabel={"Oil (bbl)"} color={COLORS_LIST[0]} keyX="1" keyY="3"
+                         color2={COLORS_LIST[1]} keyY2={"8"} label1={"Actual Oil"} label2={"Potential Oil"}/>
+          <ChartLineView values={data ?? []} title={"Time vs Water (bbl)"}
+                         xlabel={"Time"} ylabel={"Water (bbl)"} color={COLORS_LIST[2]} keyX="1" keyY="4"
+                         color2={COLORS_LIST[3]} keyY2={"9"} label1={"Actual Water"} label2={"Potential Water"}/>
+        </div>
+
+        <div className={styleRowGroup}>
+          <ChartLineView values={data ?? []} title={"Time vs Gas (MCF)"}
+                         xlabel={"Time"} ylabel={"Gas (MCF)"} color={COLORS_LIST[4]} keyX="1" keyY="5"
+                         color2={COLORS_LIST[5]} keyY2={"10"} label1={"Actual Gas"} label2={"Potential Gas"}/>
+          <ChartLineView values={data ?? []} title={"Time vs GOR (MCF/bbl)"}
+                         xlabel={"Time"} ylabel={"GOR (MCF/bbl)"} color={COLORS_LIST[6]} keyX="1" keyY="7" label1={"GOR"}/>
         </div>
 
         <TableWell well={well} values={data}/>

@@ -4,7 +4,7 @@ import {ChartBar} from "src/components/chart/index.js";
 import {CardLayout} from "src/components/base/index.js";
 
 const TopAreaByKey = ({ values, height="300px", borderRadius=0, keyPlot="sum",
-                        title="", xlabel="", ylabel="", barColor="blue" }) => {
+                        title="", xlabel="", ylabel="", color="blue" }) => {
   const [data, setData] = useState([]);
   const [labels, setLabels] = useState([]);
   const chartOptions = {
@@ -69,7 +69,7 @@ const TopAreaByKey = ({ values, height="300px", borderRadius=0, keyPlot="sum",
         datasets: [
           {
             data: data,
-            backgroundColor: barColor,
+            backgroundColor: color,
             maxBarThickness: defaultBarThickness,// + 10,
             categoryPercentage: defaultBarPercentage,// + 0.2,
             borderRadius: borderRadius,
