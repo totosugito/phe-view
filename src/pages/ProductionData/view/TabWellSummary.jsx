@@ -1,8 +1,8 @@
 import {memo, useEffect, useState} from "react";
-import FilterView from "src/pages/Home/well/FilterView.js";
-import WellCardSummary from "src/pages/Home/well/WellCardSummary.jsx";
-import TableWell from "src/pages/Home/well/TableWell.jsx";
-import ChartLineView from "src/pages/Home/well/ChartLineView.js";
+import FilterView from "src/pages/ProductionData/well/FilterView.js";
+import WellCardSummary from "src/pages/ProductionData/well/WellCardSummary.jsx";
+import TableWell from "src/pages/ProductionData/well/TableWell.jsx";
+import ChartLineView from "src/pages/ProductionData/well/ChartLineView.js";
 import {COLORS_LIST} from "src/constants/config.js";
 
 const TabWellSummary = memo(({raw, values}) => {

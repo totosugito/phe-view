@@ -3,10 +3,12 @@ import './i18n';
 import {useTranslation} from "react-i18next";
 import './assets/styles.css'
 import {Route, Routes} from "react-router-dom";
-import {Home, Page404} from "./pages/index.js";
-import {WebLoading} from "./components/index.js";
 import {useSelector} from "react-redux";
-import {RouteHome} from "./routers/index.js";
+import OpenRoute from "./components/auth/OpenRoute.jsx";
+import {LayoutOpen} from "src/components/app/index.js";
+import {ProductionData, OilLosses, Page404} from "./pages/index.js";
+import {AppNavigation, AppRoutes} from "src/routers/router.js";
+import {WebLoading} from "src/components/base/index.js";
 
 function App() {
   const {t} = useTranslation();
@@ -22,8 +24,14 @@ function App() {
 
         <Routes>
           <Route path="*" name="Page 404" element={<Page404/>}/>
-          <Route path={"/"} name="Home" element={<Home/>}/>
-          <Route path={RouteHome.path} name="Home" element={<Home/>}/>
+          <Route element={
+            <OpenRoute>
+              <LayoutOpen navigation={AppNavigation}/>
+            </OpenRoute>
+          }>
+            <Route path={AppRoutes.productionData.to} element={<ProductionData/>}/>
+            <Route path={"/"} element={<OilLosses/>}/>
+          </Route>
         </Routes>
       </Suspense>
     </div>

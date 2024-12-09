@@ -1,9 +1,9 @@
 import AreaCardSummary from "../area/AreaCardSummary.jsx";
-import TableArea from "src/pages/Home/area/TableArea.jsx";
-import DoughnutAreaWellCount from "src/pages/Home/area/DoughnutAreaWellCount.jsx";
-import TopAreaByKey from "src/pages/Home/area/TopAreaByKey.jsx";
+import TableArea from "src/pages/ProductionData/area/TableArea.jsx";
+import DoughnutAreaWellCount from "src/pages/ProductionData/area/DoughnutAreaWellCount.jsx";
+import TopAreaByKey from "src/pages/ProductionData/area/TopAreaByKey.jsx";
 import {memo} from "react";
-import TableWell from "src/pages/Home/area/TableWell.jsx";
+import TableWell from "src/pages/ProductionData/area/TableWell.jsx";
 import {COLORS_LIST} from "src/constants/config.js";
 
 const TabAreaSummary = memo(({values}) => {
