@@ -40,7 +40,7 @@ export const AppNavigation = [
   {...AppRoutes.productionData, component: "item"},
   {
     component: "group",
-    name: "Web Maps",
+    name: "Surveillance Map",
     to: "/base",
     icon: <LuGlobe className={iconClassName}/>,
     items: [

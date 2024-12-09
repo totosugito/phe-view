@@ -1,5 +1,9 @@
 const localeId = {
   translation: {
+    map: {
+      mapLayers: "Map Layers",
+      mapLegend: "Legends"
+    },
     dialog: {
       excelFormatTitle: 'Excel Format',
     },
@@ -7,6 +11,7 @@ const localeId = {
       cancel: 'Cancel',
       confirm: 'Confirm',
       close: 'Close',
+      details: 'Details',
     },
     components: {
       rowsPerPage: "Baris per halaman",

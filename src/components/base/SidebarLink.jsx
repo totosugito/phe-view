@@ -27,7 +27,7 @@ export default function SidebarLink({ nav }) {
         target={nav["target"] !== undefined ? nav["target"] : ""}
         onClick={handleClick}
         className={`my-side-bar ${matchRoute(nav["to"]) ? "text-white" : "opacity-50"}`}>
-        <div className={`flex items-center gap-x-2 ${matchRoute(nav["to"]) ? "bg-neutral" : "bg-base"} p-1 rounded-md`}>
+        <div className={`flex items-center gap-x-2 hover:bg-neutral m-1 ${matchRoute(nav["to"]) ? "bg-neutral" : "bg-base"} p-1 rounded-md`}>
           <div className={"w-[32px]"}>{nav["icon"]}</div>
           <span>{nav["name"]}</span>
         </div>
@@ -43,7 +43,7 @@ export default function SidebarLink({ nav }) {
         target={nav["target"] !== undefined ? nav["target"] : ""}
         onClick={handleClick}
         className={`my-side-bar ${matchRoute(nav["to"]) ? "text-white" : "opacity-50"}`}>
-        <div className={`flex items-center gap-x-2 ${matchRoute(nav["to"]) ? "bg-neutral" : "bg-base"} p-1 rounded-md`}>
+        <div className={`flex items-center gap-x-2 hover:bg-neutral m-1 ${matchRoute(nav["to"]) ? "bg-neutral" : "bg-base"} p-1 rounded-md`}>
           <div className={"flex w-[32px] justify-end pr-[5px]"}><FaCircle size={5}/></div>
           <span>{nav["name"]}</span>
         </div>
@@ -55,7 +55,7 @@ export default function SidebarLink({ nav }) {
   const ItemGroup = ({ nav }) => {
     return (
       <>
-        <div className="flex items-center p-1 my-side-bar justify-between cursor-pointer w-full" onClick={() => {
+        <div className="flex items-center p-1 m-1 my-side-bar justify-between cursor-pointer w-full hover:bg-neutral opacity-50 rounded-md" onClick={() => {
           setIsExpanded(!isExpanded);
         }}>
           <div className={`flex flex-row gap-x-2 opacity-50`}>
