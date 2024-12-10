@@ -10,6 +10,9 @@ const computePlatformsData = (data, idxData, idxSma7, idxSma30) => {
         let actual_oil = [];
         for (let i = 0; i < rowsCount; i++) {
             let row = rows[i];
+            // if(!row[idxData]) {
+            //     continue;
+            // }
             actual_oil.push(row[idxData]);
         }
         const actual_oil_sma7 = movingAverage(actual_oil, 7);

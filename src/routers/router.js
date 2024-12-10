@@ -28,6 +28,11 @@ export const AppRoutes = {
   actualOil: {
     name: "Actual Oil",
     to: "/production-actual-oil",
+    icon: <RiHome5Fill className={iconClassName}/>,
+  },
+  actualGas: {
+    name: "Actual Gas",
+    to: "/production-actual-gas",
     // to: "/",
     icon: <RiHome5Fill className={iconClassName}/>,
   }
@@ -47,6 +52,7 @@ export const AppNavigation = [
     items: [
       {...AppRoutes.oilLosses, component: "item"},
       {...AppRoutes.actualOil, component: "item"},
+      {...AppRoutes.actualGas, component: "item"},
     ]
   }
 ]

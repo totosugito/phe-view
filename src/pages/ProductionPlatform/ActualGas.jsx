@@ -12,7 +12,7 @@ import TabTrend from "./view/TabTrend.jsx";
 import TabSummary from "./view/TabSummary.jsx";
 import {date_to_string} from "src/utils/MyUtils.js";
 
-const ActualOil = ({title="Actual Oil", idxData = 2, idxSma7 = 10, idxSma30 = 11}) => {
+const ActualGas = ({title="Actual Gas", idxData = 4, idxSma7 = 10, idxSma30 = 11}) => {
   const {t} = useTranslation();
   const [loading, setLoading] = useState(false);
   const [xlsxRowStart, setXlsxRowStart] = useState(1);
@@ -102,7 +102,7 @@ const ActualOil = ({title="Actual Oil", idxData = 2, idxSma7 = 10, idxSma30 = 11
 
   return (
     <div className={"h-screen flex flex-col"}>
-      <NavBar title={<div className={"text-lg"}><span className={"mr-2"}>{AppRoutes.actualOil.name}</span><span
+      <NavBar title={<div className={"text-lg"}><span className={"mr-2"}>{AppRoutes.actualGas.name}</span><span
         className={"text-primary font-bold"}>{date_to_string(selectedDay, "dd/MM/yyyy")}</span></div>}/>
       {loading ? <WebLoading/> :
         <BodyContents>
@@ -139,4 +139,4 @@ const ActualOil = ({title="Actual Oil", idxData = 2, idxSma7 = 10, idxSma30 = 11
   )
 }
 
-export default ActualOil
+export default ActualGas

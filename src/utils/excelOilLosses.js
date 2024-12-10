@@ -94,13 +94,13 @@ export const computeDataSummary = (data, colIndex, colValue) => {
     let pd = rows[7];
     let sma7 = rows[8];
     let sma30 = rows[9];
-    if((sma7 > sma30) && (sma7 > pd)) {
+    if((sma7 > sma30) && (pd > sma7)) {
       trend = 0;
     }
-    else if((sma7 > sma30) && (sma7 < pd)) {
+    else if((sma7 > sma30) && (pd < sma7)) {
       trend = 1;
     }
-    else if((sma7 < sma30) && (sma7 > pd)) {
+    else if((sma7 < sma30) && (pd > sma7)) {
       trend = 2;
     }
     else {

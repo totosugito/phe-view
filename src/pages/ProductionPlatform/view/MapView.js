@@ -12,7 +12,7 @@ import {
 import {MapControl, ViewCustomLegend} from "src/components/map/index.js";
 import {useTranslation} from "react-i18next";
 
-const MapView = ({geoPoints, mode = "rate", onClickDetails}) => {
+const MapView = ({geoPoints, mode = "rate", title="", onClickDetails}) => {
   const {t} = useTranslation();
   const [map, setMap] = useState(null);
   const MapProps = defaultMapProps();
@@ -48,15 +48,15 @@ const MapView = ({geoPoints, mode = "rate", onClickDetails}) => {
       name: "Y Latitude"
     },
     {
-      key: "daily_actual_oil_losses",
-      name: "Est. Actual Oil Losses"
+      key: "data",
+      name: title
     },
     {
-      key: "daily_actual_oil_losses_sma7",
+      key: "sma7",
       name: t("label.sma7")
     },
     {
-      key: "daily_actual_oil_losses_sma30",
+      key: "sma30",
       name: t("label.sma30")
     }
   ]
