@@ -7,9 +7,9 @@ import {
   useReactTable
 } from "@tanstack/react-table";
 import {useState} from "react";
-import {Pagination as TablePagination} from "./Pagination.jsx"
-import {Search as TableSearch} from "./Search.jsx"
-import {RowsPerPage as TableRowsPerPage} from "./RowsPerPage.jsx"
+import TablePagination from "./Pagination.jsx"
+import TableSearch from "./Search.jsx"
+import TableRowsPerPage from "./RowsPerPage.jsx"
 import {useTranslation} from "react-i18next";
 
 
@@ -17,7 +17,7 @@ const TableData = ({
                      columns, data, tableLayout = "fixed",
                      toolbarTopLeft,
                      rowsPerPage = 5,
-                     styleTableContainer = "", //"overflow-auto",
+                     styleTableContainer = "",
                      className = "table table-zebra table-sm",
                      styleHeaderRow = "border-b border-neutral-500",
                      styleHeaderCell = "p-0 bg-neutral",

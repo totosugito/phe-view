@@ -5,6 +5,8 @@ import {
 } from "chart.js";
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import annotationPlugin from 'chartjs-plugin-annotation';
+import zoomPlugin from 'chartjs-plugin-zoom';
+
 import 'chartjs-adapter-date-fns';
 export const defaultBarThickness = 60;
 export const defaultBarPercentage = 0.5;
@@ -63,7 +65,26 @@ export const defaultChartOptions = {
     },
     datalabels: {
       display: false
-    }
+    },
+    // zoom: {
+    //   zoom: {
+    //     pan: {
+    //       enabled: true,
+    //       mode: 'xy',
+    //     },
+    //     drag: {
+    //       enabled: true,
+    //       mode: 'xy',
+    //     },
+    //     wheel: {
+    //       enabled: true,
+    //     },
+    //     pinch: {
+    //       enabled: true
+    //     },
+    //     mode: 'xy',
+    //   }
+    // }
   }
 };
 
@@ -122,4 +143,4 @@ export const ReactChartJs = ({
   );
 };
 
-ReactChartJs.register = Chart.register(...registerables, ChartDataLabels, annotationPlugin) || noop;
+ReactChartJs.register = Chart.register(...registerables, ChartDataLabels, annotationPlugin, zoomPlugin) || noop;

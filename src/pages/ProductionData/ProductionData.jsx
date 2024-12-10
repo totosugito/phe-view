@@ -90,7 +90,7 @@ const ProductionData = () => {
 
   return (
     <div className={"h-screen flex flex-col"}>
-      <NavBar title={AppRoutes.productionData.name}/>
+      <NavBar title={<div className={"text-lg"}>{AppRoutes.productionData.name}</div>}/>
       {loading ? <WebLoading/> :
         <BodyContents>
           <div className={"flex flex-row gap-x-2 justify-end items-center"}>

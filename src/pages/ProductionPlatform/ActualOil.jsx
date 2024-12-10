@@ -4,29 +4,29 @@ import {BodyContents, WebLoading} from "src/components/base/index.js";
 import {useTranslation} from "react-i18next";
 import {useEffect, useState} from "react";
 import {geoJsonPointsToArray} from "src/utils/utils-map.js";
-import Worker from "../../utils/excelOilLossesWorker?worker";
+import Worker from "../../utils/excelProductionPlatformWorker?worker";
 import {toast} from "react-hot-toast";
-import {computeDataSummary, fillGeojsonDataWithSummary} from "src/utils/excelOilLosses.js";
+import {computeDataSummary, fillGeojsonDataWithSummary} from "src/utils/excelProductionPlatform.js";
 import TabRate from "./view/TabRate.jsx";
 import TabTrend from "./view/TabTrend.jsx";
 import TabSummary from "./view/TabSummary.jsx";
 import {date_to_string} from "src/utils/MyUtils.js";
 
-const OilLosses = ({}) => {
+const ActualOil = ({idxData = 2, idxSma7 = 10, idxSma30 = 11}) => {
   const {t} = useTranslation();
   const [loading, setLoading] = useState(false);
   const [xlsxRowStart, setXlsxRowStart] = useState(1);
   const [xlsxRowEnd, setXlsxRowEnd] = useState(100000);
   const [xlsxColStart, setXlsxColStart] = useState(0);
-  const [xlsxColEnd, setXlsxColEnd] = useState(6);
-  const [selectedDay, setSelectedDay] = useState(new Date(2024, 10, 24));
+  const [xlsxColEnd, setXlsxColEnd] = useState(9);
+  const [selectedDay, setSelectedDay] = useState(new Date(2024, 10, 27));
   const [data, setData] = useState(null);
   const [filteredData, setFilteredData] = useState(null);
   const [selectedItem, setSelectedItem] = useState(null);
-  const [activeTab, setActiveTab] = useState(0);
+  const [activeTab, setActiveTab] = useState(2);
 
   const geojsonFile = "/data/geojson_point_oses.geojson";
-  const excelFile = "/data/DailyPlatform2024OilLosses.xlsx";
+  const excelFile = "/data/DailyPlatform2024Production.xlsx";
   const initData = async () => {
     // read excels file
     const fetchExcelFile = async () => {
@@ -52,7 +52,7 @@ const OilLosses = ({}) => {
       // Initialize the worker
       const worker = new Worker();
 
-      worker.postMessage({fileContent, xlsxRowStart, xlsxRowEnd, xlsxColStart, xlsxColEnd});
+      worker.postMessage({fileContent, xlsxRowStart, xlsxRowEnd, xlsxColStart, xlsxColEnd, idxData, idxSma7, idxSma30});
 
       // Handle messages from the worker
       worker.onmessage = async function (event) {
@@ -69,7 +69,8 @@ const OilLosses = ({}) => {
 
           setData(data); // Set the processed data
           setFilteredData(selected);
-          setSelectedItem(Object.keys(data.groups)[0]);
+          // setSelectedItem(Object.keys(data.groups)[0]);
+          setSelectedItem("Rama B");
         } else {
           toast.error(error);
           setData(null);
@@ -101,7 +102,7 @@ const OilLosses = ({}) => {
 
   return (
     <div className={"h-screen flex flex-col"}>
-      <NavBar title={<div className={"text-lg"}><span className={"mr-2"}>{AppRoutes.oilLosses.name}</span><span
+      <NavBar title={<div className={"text-lg"}><span className={"mr-2"}>{AppRoutes.actualOil.name}</span><span
         className={"text-primary font-bold"}>{date_to_string(selectedDay, "dd/MM/yyyy")}</span></div>}/>
       {loading ? <WebLoading/> :
         <BodyContents>
@@ -121,10 +122,10 @@ const OilLosses = ({}) => {
             {(data && filteredData) &&
               <div className="bordered pt-1 flex-1">
                 <div className={`flex flex-grow w-full h-full ${activeTab === 0 ? '' : 'hidden'}`}>
-                  <TabRate values={filteredData} onClickDetails={onClickDetails}/>
+                  {/*<TabRate values={filteredData} onClickDetails={onClickDetails}/>*/}
                 </div>
                 <div className={`flex flex-grow w-full h-full ${activeTab === 1 ? '' : 'hidden'}`}>
-                  <TabTrend values={filteredData} onClickDetails={onClickDetails}/>
+                  {/*<TabTrend values={filteredData}/>*/}
                 </div>
                 <div className={`flex flex-grow w-full h-full ${activeTab === 2 ? '' : 'hidden'}`}>
                   <TabSummary values={data.groups} filterList={data.summary.keys} selectedItem={selectedItem}/>
@@ -138,4 +139,4 @@ const OilLosses = ({}) => {
   )
 }
 
-export default OilLosses
+export default ActualOil

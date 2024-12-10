@@ -6,7 +6,7 @@ import {Route, Routes} from "react-router-dom";
 import {useSelector} from "react-redux";
 import OpenRoute from "./components/auth/OpenRoute.jsx";
 import {LayoutOpen} from "src/components/app/index.js";
-import {ProductionData, OilLosses, Page404} from "./pages/index.js";
+import {ProductionData, OilLosses, Page404, ActualOil} from "./pages/index.js";
 import {AppNavigation, AppRoutes} from "src/routers/router.js";
 import {WebLoading} from "src/components/base/index.js";
 
@@ -29,8 +29,11 @@ function App() {
               <LayoutOpen navigation={AppNavigation}/>
             </OpenRoute>
           }>
-            <Route path={AppRoutes.productionData.to} element={<ProductionData/>}/>
+            {/*<Route path={"/"} element={<ProductionPlatform/>}/>*/}
             <Route path={"/"} element={<OilLosses/>}/>
+            <Route path={AppRoutes.productionData.to} element={<ProductionData/>}/>
+            <Route path={AppRoutes.oilLosses.to} element={<OilLosses/>}/>
+            <Route path={AppRoutes.actualOil.to} element={<ActualOil/>}/>
           </Route>
         </Routes>
       </Suspense>

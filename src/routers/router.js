@@ -25,9 +25,10 @@ export const AppRoutes = {
     to: "/",
     icon: <RiHome5Fill className={iconClassName}/>,
   },
-  productionPlatform: {
-    name: "Production Platform",
-    to: "/production-platform",
+  actualOil: {
+    name: "Actual Oil",
+    to: "/production-actual-oil",
+    // to: "/",
     icon: <RiHome5Fill className={iconClassName}/>,
   }
 }
@@ -45,7 +46,7 @@ export const AppNavigation = [
     icon: <LuGlobe className={iconClassName}/>,
     items: [
       {...AppRoutes.oilLosses, component: "item"},
-      {...AppRoutes.productionPlatform, component: "item"},
+      {...AppRoutes.actualOil, component: "item"},
     ]
   }
 ]

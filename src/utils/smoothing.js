@@ -50,6 +50,9 @@ export function movingAverage(data, windowSize) {
       averages.push(windowSum / windowSize); // Calculate average.
       windowSum -= data[i - (windowSize - 1)]; // Remove the oldest element in the window.
     }
+    else {
+      averages.push(data[i]);
+    }
   }
 
   return averages;

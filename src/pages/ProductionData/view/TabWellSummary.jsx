@@ -20,7 +20,7 @@ const TabWellSummary = memo(({raw, values}) => {
     let values_ = [];
     for(let i=0; i<values.length; i++) {
       let item = values[i];
-      values_.push({id: i, name: item?.well});
+      values_.push({value: i, label: item?.well});
     }
     setFilterDropdown(values_);
   }

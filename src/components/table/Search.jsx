@@ -1,5 +1,5 @@
 import { IoMdClose } from "react-icons/io";
-export const Search = ({searchQuery, setSearchQuery}) => {
+const Search = ({searchQuery, setSearchQuery}) => {
     return (
         <div className="flex items-center py-4 input input-sm input-bordered">
             <input
@@ -12,3 +12,4 @@ export const Search = ({searchQuery, setSearchQuery}) => {
         </div>
     );
 }
+export default Search

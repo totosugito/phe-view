@@ -28,24 +28,17 @@ export const mapTileList = [
 
 export const mapLegendProductionRate = [
     {
-        key: "excellent",
+        id: 0,
+        key: "poor",
         view: "circle",
-        name: "Excellent",
-        bgColor: "#008000",
+        name: "Poor",
+        bgColor: "#FF0000",
         borderColor: "#000000",
-        min: 1,
+        min: 0.25,
         size: "16px"
     },
     {
-        key: "good",
-        view: "circle",
-        name: "Good",
-        bgColor: "#32CD32",
-        borderColor: "#000000",
-        min: 0.75,
-        size: "16px"
-    },
-    {
+        id: 1,
         key: "fair",
         view: "circle",
         name: "Fair",
@@ -55,14 +48,68 @@ export const mapLegendProductionRate = [
         size: "16px"
     },
     {
+        id: 2,
+        key: "good",
+        view: "circle",
+        name: "Good",
+        bgColor: "#32CD32",
+        borderColor: "#000000",
+        min: 0.75,
+        size: "16px"
+    },
+    {
+        id: 3,
+        key: "excellent",
+        view: "circle",
+        name: "Excellent",
+        bgColor: "#008000",
+        borderColor: "#000000",
+        min: 1,
+        size: "16px"
+    },
+];
+
+export const mapLegendProductionTrend = [
+    {
+        id: 0,
         key: "poor",
         view: "circle",
-        name: "Poor",
+        name: "Down",
         bgColor: "#FF0000",
         borderColor: "#000000",
         min: 0.25,
         size: "16px"
-    }
+    },
+    {
+        id: 1,
+        key: "fair",
+        view: "circle",
+        name: "Semi-Down",
+        bgColor: "#FFA500",
+        borderColor: "#000000",
+        min: 0.5,
+        size: "16px"
+    },
+    {
+        id: 2,
+        key: "good",
+        view: "circle",
+        name: "Semi-Up",
+        bgColor: "#32CD32",
+        borderColor: "#000000",
+        min: 0.75,
+        size: "16px"
+    },
+    {
+        id: 3,
+        key: "excellent",
+        view: "circle",
+        name: "Up",
+        bgColor: "#008000",
+        borderColor: "#000000",
+        min: 1,
+        size: "16px"
+    },
 ];
 
 export function getTileMap(key) {

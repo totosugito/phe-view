@@ -1,5 +1,5 @@
 import {useTranslation} from "react-i18next";
-import {ColumnHeader, TableData} from "src/components/table/index.jsx";
+import {ColumnHeader, TableData} from "src/components/table/index.js";
 import {useMemo} from "react";
 import {to_decimal_formatted} from "src/utils/MyUtils.js";
 import {CardLayout} from "src/components/base/index.js";

@@ -2,17 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
+.my-group-button-base {
+    @apply btn btn-sm btn-neutral bg-neutral-500 text-white
+}
 .my-group-button-first {
-    @apply btn btn-sm btn-neutral rounded-tl-md rounded-tr-md rounded-br-none rounded-bl-none text-white
+    @apply my-group-button-base rounded-tl-md rounded-tr-md rounded-br-none rounded-bl-none
 }
 .my-group-button-mid {
-    @apply btn btn-sm btn-neutral rounded-none text-white
+    @apply my-group-button-base rounded-none
 }
 .my-group-button-last {
-    @apply btn btn-sm btn-neutral rounded-tl-none rounded-tr-none rounded-br-md rounded-bl-md text-white
+    @apply my-group-button-base rounded-tl-none rounded-tr-none rounded-br-md rounded-bl-md
 }
 .my-group-button-self {
-    @apply btn btn-sm btn-neutral rounded-md text-white
+    @apply my-group-button-base rounded-md
 }
 
 .my-dialog-title {

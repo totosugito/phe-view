@@ -16,7 +16,7 @@ const NavBar = ({title, left, right}) => {
           <FiMenu fontSize={20}/>
         </button>
       </div>
-        {title && <div className={"text-xl md:text-xl truncate"}>{title}</div>}
+        {title}
         {left}
       </div>
 

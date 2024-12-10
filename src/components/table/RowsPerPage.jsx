@@ -1,6 +1,6 @@
 import {useTranslation} from "react-i18next";
 
-export const RowsPerPage = ({table, rowsPerPage, setRowsPerPage, pageList=[5,10,15,20]}) => {
+const RowsPerPage = ({table, rowsPerPage, setRowsPerPage, pageList=[5,10,15,20]}) => {
     const {t} = useTranslation();
     return (
         <div className={"flex gap-2 items-center"}>
@@ -23,3 +23,4 @@ export const RowsPerPage = ({table, rowsPerPage, setRowsPerPage, pageList=[5,10,
         </div>
     );
 }
+export default RowsPerPage

@@ -1,4 +1,4 @@
-export const Pagination = ({table, pageIndex, setPageIndex}) => {
+const Pagination = ({table, pageIndex, setPageIndex}) => {
     const pageCount = table.getPageCount();
     const generatePageNumbers = () => {
         const pageNumbers = [];
@@ -68,3 +68,4 @@ export const Pagination = ({table, pageIndex, setPageIndex}) => {
         </>
     )
 };
+export default Pagination

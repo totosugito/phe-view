@@ -13,6 +13,10 @@ const localeId = {
       close: 'Close',
       details: 'Details',
     },
+    label: {
+      sma7: "Weekly Avg",
+      sma30: "Monthly Avg",
+    },
     components: {
       rowsPerPage: "Baris per halaman",
       noData: "Tidak ada data"
