@@ -1,4 +1,4 @@
-import {RiHome5Fill, RiDatabase2Line} from "react-icons/ri";
+import {RiHome5Fill, RiDatabase2Line, RiShip2Line} from "react-icons/ri";
 import {LuGlobe} from "react-icons/lu";
 
 const iconClassName = "text-2xl";
@@ -21,8 +21,8 @@ export const AppRoutes = {
   },
   oilLosses: {
     name: "Oil Losses",
-    // to: "/oil-losses",
-    to: "/",
+    to: "/oil-losses",
+    // to: "/",
     icon: <RiHome5Fill className={iconClassName}/>,
   },
   actualOil: {
@@ -35,7 +35,13 @@ export const AppRoutes = {
     to: "/production-actual-gas",
     // to: "/",
     icon: <RiHome5Fill className={iconClassName}/>,
-  }
+  },
+  vesselTracking: {
+    name: "Vessel Tracking",
+    // to: "/vessel-tracking",
+    to: "/",
+    icon: <RiShip2Line className={iconClassName}/>,
+  },
 }
 
 export const AppNavigation = [
@@ -43,6 +49,7 @@ export const AppNavigation = [
     component: "title",
     name: "GENERAL"
   },
+  {...AppRoutes.vesselTracking, component: "item"},
   {...AppRoutes.productionData, component: "item"},
   {
     component: "group",

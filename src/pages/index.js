@@ -5,3 +5,4 @@ export const ProductionData = React.lazy(() => import("./ProductionData/Producti
 export const OilLosses = React.lazy(() => import("./OilLosses/OilLosses.jsx"));
 export const ActualOil = React.lazy(() => import("./ProductionPlatform/ActualOil.jsx"));
 export const ActualGas = React.lazy(() => import("./ProductionPlatform/ActualGas.jsx"));
+export const VesselTracking = React.lazy(() => import("./VesselTracking/VesselTracking.jsx"));
