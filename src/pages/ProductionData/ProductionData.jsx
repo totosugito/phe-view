@@ -134,10 +134,10 @@ const ProductionData = () => {
 
                     {data &&
                         <div className="bordered p-2">
-                            <div className={activeTab === 0 ? '' : 'hidden'}>
+                            <div className={`flex flex-grow w-full h-full ${activeTab === 0 ? '' : 'hidden'}`}>
                                 <TabAreaSummary values={data?.summary ?? {}} totalDaily={data?.summary?.totalDaily ?? []}/>
                             </div>
-                            <div className={activeTab === 1 ? '' : 'hidden'}>
+                            <div className={`flex flex-grow w-full h-full ${activeTab === 1 ? '' : 'hidden'}`}>
                                 <TabWellSummary values={data?.summary?.wells ?? []} raw={data?.data ?? []}/>
                             </div>
                         </div>

@@ -13,7 +13,7 @@ const TabAreaSummary = memo(({values, totalDaily}) => {
     const styleRowGroup = "grid md:grid-cols-2 grid-cols-1 gap-3";
 
     return (
-        <div className={"flex flex-col gap-3"}>
+        <div className={"flex flex-col gap-3 w-full h-full"}>
             <AreaCardSummary values={values}/>
             <div>
                 <ChartLinesView values={totalDaily ?? []}
