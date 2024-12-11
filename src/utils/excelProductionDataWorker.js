@@ -1,5 +1,6 @@
 import * as XLSX from "xlsx";
-import {excelDateToJSDate} from "./MyUtils.js";
+import {excelDateToDateObject} from "src/utils/utils-excel.js";
+import {movingAverage} from "src/utils/smoothing.js";
 
 function areaSummary(data) {
   // Initialize an empty object to store the summary
@@ -153,6 +154,45 @@ function filterTopBySummary(data, count) {
   return result;
 }
 
+/**
+ * Groups data by date and sums the values of the "2" property.
+ * @param {Array} data - The input array of objects.
+ * @returns {Array} - The grouped data array with total sums per date.
+ */
+function computeTotalDaily(data) {
+  let compute_ = Object.values(
+      data.reduce((acc, item) => {
+        const date = item["1"];
+        const dateKey = date.toISOString().split("T")[0]; // Extract the date (YYYY-MM-DD)
+
+        if (!acc[dateKey]) {
+          acc[dateKey] = { "1": date, "3": 0 }; // actual oil
+        }
+
+        if(item["3"]) {
+          acc[dateKey]["3"] += item["3"];
+        }
+        return acc;
+      }, {})
+  );
+
+  let total3 = [];
+  for (let i = 0; i < compute_.length; i++) {
+    let item = compute_[i];
+    total3.push(item["3"]);
+  }
+  const total3_sma7 = movingAverage(total3, 7);
+  const total3_sma30 = movingAverage(total3, 30);
+
+  let result = [];
+  for (let i = 0; i < compute_.length; i++) {
+    let item = compute_[i];
+    item["3-sma7"] = total3_sma7[i];  // actual oil SMA7
+    item["3-sma30"] = total3_sma30[i];  // actual oil SMA30
+    result.push(item);
+  }
+  return result;
+}
 
 self.onmessage = function (e) {
   const {fileContent, xlsxRowStart, xlsxRowEnd, xlsxColStart, xlsxColEnd} = e.data;
@@ -189,7 +229,7 @@ self.onmessage = function (e) {
 
         let v;
         if (iCol === 1) {
-          v = excelDateToJSDate(cell ? cell.v : 0)
+          v = excelDateToDateObject(cell ? cell.v : 0)
         } else {
           v = cell ? cell.v : undefined
         }
@@ -215,6 +255,7 @@ self.onmessage = function (e) {
     const areas = areaGroupAndSummarize(wellSummary);
     const areasSummary = areaSummary(areas);
     const topData = filterTopBySummary(wellSummary, 5);
+    const totalDaily = computeTotalDaily(jsonData);
 
     // ------------ create area summary ------------
     const obj = {
@@ -224,9 +265,10 @@ self.onmessage = function (e) {
         summary: areasSummary
       },
       wells: wellSummary,
-      tops: topData
+      tops: topData,
+      totalDaily: totalDaily
     }
-    // console.log(obj)
+    console.log(obj)
 
     // Send the parsed data back to the main thread
     self.postMessage({status: "success", data: {data: jsonData, summary: obj}});

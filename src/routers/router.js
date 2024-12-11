@@ -16,32 +16,34 @@ export const AppRoutes = {
   productionData: {
     name: "Production Data",
     to: "/production-data",
-    // to: "/",
     icon: <RiDatabase2Line className={iconClassName}/>,
   },
   oilLosses: {
     name: "Oil Losses",
     to: "/oil-losses",
-    // to: "/",
     icon: <RiHome5Fill className={iconClassName}/>,
   },
   actualOil: {
     name: "Actual Oil",
-    to: "/production-actual-oil",
+    to: "/actual-oil",
+      // to: "/",
     icon: <RiHome5Fill className={iconClassName}/>,
   },
   actualGas: {
     name: "Actual Gas",
     to: "/production-actual-gas",
-    // to: "/",
     icon: <RiHome5Fill className={iconClassName}/>,
   },
   vesselTracking: {
     name: "Vessel Tracking",
-    // to: "/vessel-tracking",
-    to: "/",
+    to: "/vessel-tracking",
     icon: <RiShip2Line className={iconClassName}/>,
   },
+  // root: {
+  //   name: "Actual Oil",
+  //   to: "/",
+  //   icon: <RiHome5Fill className={iconClassName}/>,
+  // },
 }
 
 export const AppNavigation = [
@@ -49,8 +51,6 @@ export const AppNavigation = [
     component: "title",
     name: "GENERAL"
   },
-  {...AppRoutes.vesselTracking, component: "item"},
-  {...AppRoutes.productionData, component: "item"},
   {
     component: "group",
     name: "Surveillance Map",
@@ -61,5 +61,7 @@ export const AppNavigation = [
       {...AppRoutes.actualOil, component: "item"},
       {...AppRoutes.actualGas, component: "item"},
     ]
-  }
+  },
+  {...AppRoutes.productionData, component: "item"},
+  {...AppRoutes.vesselTracking, component: "item"},
 ]

@@ -29,11 +29,12 @@ function App() {
               <LayoutOpen navigation={AppNavigation}/>
             </OpenRoute>
           }>
-            <Route path={"/"} element={<VesselTracking/>}/>
+            <Route path={"/"} element={<OilLosses/>}/>
             <Route path={AppRoutes.productionData.to} element={<ProductionData/>}/>
             <Route path={AppRoutes.oilLosses.to} element={<OilLosses/>}/>
             <Route path={AppRoutes.actualOil.to} element={<ActualOil/>}/>
             <Route path={AppRoutes.actualGas.to} element={<ActualGas/>}/>
+            <Route path={AppRoutes.vesselTracking.to} element={<VesselTracking/>}/>
           </Route>
         </Routes>
       </Suspense>

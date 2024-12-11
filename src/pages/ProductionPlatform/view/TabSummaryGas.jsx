@@ -5,7 +5,7 @@ import {COLORS_LIST} from "src/constants/config.js";
 import {ChartLinesView, FilterView} from "src/components/app/index.js";
 import {useTranslation} from "react-i18next";
 
-const TabSummary = memo(({values, filterList, selectedItem}) => {
+const TabSummaryGas = memo(({values, filterList, selectedItem}) => {
   const {t} = useTranslation();
   const [filterDropdown, setFilterDropdown] = useState(null);
   const [selectedData, setSelectedData] = useState(null);
@@ -28,15 +28,15 @@ const TabSummary = memo(({values, filterList, selectedItem}) => {
         <div className={"flex flex-col gap-3"}>
           <ChartLinesView values={selectedData?.rows ?? []}
                           height={"450px"}
-                          title={"Oil Losses (bbl)"}
-                          xLabel={"Date"} yLabel={"Actual Oil Losses (bbl)"} keyX="1"
-                          color1={COLORS_LIST[0]} keyY1={"7"} label1={"Actual Oil Losses"}
-                          color2={COLORS_LIST[1]} keyY2={"8"} label2={t("label.sma7")}
-                          color3={COLORS_LIST[2]} keyY3={"9"} label3={t("label.sma30")}/>
+                          title={"Actual Gas (bbl)"}
+                          xLabel={"Date"} yLabel={"Actual Gas (bbl)"} keyX="1"
+                          color1={COLORS_LIST[0]} keyY1={"4"} label1={"Actual Gas"}
+                          color2={COLORS_LIST[1]} keyY2={"10"} label2={t("label.sma7")}
+                          color3={COLORS_LIST[2]} keyY3={"11"} label3={t("label.sma30")}/>
           <TableView values={selectedData?.rows} title={selectedData?.name}/>
         </div>
       }
     </div>
   );
 })
-export default TabSummary
+export default TabSummaryGas

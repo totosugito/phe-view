@@ -9,7 +9,7 @@ import {toast} from "react-hot-toast";
 import {computeDataSummary, fillGeojsonDataWithSummary} from "src/utils/excelProductionPlatform.js";
 import TabRate from "./view/TabRate.jsx";
 import TabTrend from "./view/TabTrend.jsx";
-import TabSummary from "./view/TabSummary.jsx";
+import TabSummaryOil from "./view/TabSummaryOil.jsx";
 import {date_to_string} from "src/utils/MyUtils.js";
 
 const ActualOil = ({title="Actual Oil", idxData = 2, idxSma7 = 10, idxSma30 = 11}) => {
@@ -128,7 +128,7 @@ const ActualOil = ({title="Actual Oil", idxData = 2, idxSma7 = 10, idxSma30 = 11
                   <TabTrend values={filteredData} onClickDetails={onClickDetails} title={title}/>
                 </div>
                 <div className={`flex flex-grow w-full h-full ${activeTab === 2 ? '' : 'hidden'}`}>
-                  <TabSummary values={data.groups} filterList={data.summary.keys} selectedItem={selectedItem}/>
+                  <TabSummaryOil values={data.groups} filterList={data.summary.keys} selectedItem={selectedItem}/>
                 </div>
               </div>
             }
