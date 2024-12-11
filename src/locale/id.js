@@ -6,6 +6,8 @@ const localeId = {
     },
     dialog: {
       excelFormatTitle: 'Excel Format',
+      logOutTitle: 'Log Out',
+      logOutDesc: 'Are you sure you want to log out?',
     },
     button: {
       cancel: 'Cancel',

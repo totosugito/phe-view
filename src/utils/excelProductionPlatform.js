@@ -75,17 +75,19 @@ export const computeDataSummary = (data, colIndex, colValue, idxData, idxSma7, i
     // compute rate
     let rate = 0;
     let curPd = rows[idxData] - min_["data"];
-    if(curPd < deltaData) {
-      rate = 0;
-    }
-    else if(curPd < deltaData * 2) {
-      rate = 1;
-    }
-    else if(curPd < deltaData * 3) {
-      rate = 2;
+    if(rows[idxData] ===0) {
+      rate = 4;
     }
     else {
-      rate = 3;
+      if (curPd < deltaData) {
+        rate = 0;
+      } else if (curPd < deltaData * 2) {
+        rate = 1;
+      } else if (curPd < deltaData * 3) {
+        rate = 2;
+      } else {
+        rate = 3;
+      }
     }
     // console.log(deltaData, min_["data"], max_["data"], key, rows[idxData], curPd, rate)
 

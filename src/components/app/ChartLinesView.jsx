@@ -10,8 +10,11 @@ const ChartLinesView = ({
                           values, height = "300px", title = "",
                           xLabel = "", yLabel = "", keyX = "1",
                           color1 = "blue", keyY1 = "3", label1 = "", pointRadius1=0, borderWidth1=2,
+                          cubicInterpolationMode1="monotone",
                           color2 = 'red', keyY2 = undefined, label2 = "", pointRadius2=0, borderWidth2=2,
+                          cubicInterpolationMode2="monotone",
                           color3 = 'green', keyY3 = undefined, label3 = "", pointRadius3=0, borderWidth3=2,
+                          cubicInterpolationMode3="monotone",
                         }) => {
   const {t} = useTranslation();
   const [data, setData] = useState([])
@@ -40,7 +43,7 @@ const ChartLinesView = ({
         datasets: [
           {
             label: label1,
-            cubicInterpolationMode: "monotone",
+            cubicInterpolationMode: cubicInterpolationMode1,
             data: data1_,
             borderColor: color1,
             pointRadius: pointRadius1,
@@ -48,7 +51,7 @@ const ChartLinesView = ({
           },
           ...((data2_.length > 0) ? [{
             label: label2,
-            cubicInterpolationMode: "monotone",
+            cubicInterpolationMode: cubicInterpolationMode2,
             data: data2_,
             borderColor: color2,
             pointRadius: pointRadius2,
@@ -57,7 +60,7 @@ const ChartLinesView = ({
           }] : []),
           ...((data3_.length > 0) ? [{
             label: label3,
-            cubicInterpolationMode: "monotone",
+            cubicInterpolationMode: cubicInterpolationMode3,
             data: data3_,
             borderColor: color3,
             pointRadius: pointRadius3,

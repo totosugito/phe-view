@@ -1,4 +1,4 @@
-export const DEFAULT_MAP_TILE = "esri-world";
+export const DEFAULT_MAP_TILE = "opentstreetmap";
 import openStreetMapTile from "src/assets/map/openstreetmap.png";
 import openTopoMapTile from "src/assets/map/opentopomap.png";
 import esriWorldTile from "src/assets/map/esri-world.png";
@@ -63,6 +63,16 @@ export const mapLegendProductionRate = [
         view: "circle",
         name: "Excellent",
         bgColor: "#008000",
+        borderColor: "#000000",
+        min: 1,
+        size: "16px"
+    },
+    {
+        id: 4,
+        key: "inactive",
+        view: "circle",
+        name: "Inactive",
+        bgColor: "#ABABAB",
         borderColor: "#000000",
         min: 1,
         size: "16px"

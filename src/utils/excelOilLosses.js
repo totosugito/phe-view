@@ -75,17 +75,19 @@ export const computeDataSummary = (data, colIndex, colValue) => {
     // compute rate
     let rate = 0;
     let curPd = rows[7] - min_["daily_actual_oil_losses"];
-    if(curPd < deltaDailyActualOilLosses) {
-      rate = 3;
-    }
-    else if(curPd < deltaDailyActualOilLosses * 2) {
-      rate = 2;
-    }
-    else if(curPd < deltaDailyActualOilLosses * 3) {
-      rate = 1;
+    if(rows[7] === 0) {
+      rate = 4;
     }
     else {
-      rate = 0;
+      if (curPd < deltaDailyActualOilLosses) {
+        rate = 3;
+      } else if (curPd < deltaDailyActualOilLosses * 2) {
+        rate = 2;
+      } else if (curPd < deltaDailyActualOilLosses * 3) {
+        rate = 1;
+      } else {
+        rate = 0;
+      }
     }
     // console.log(deltaDailyActualOilLosses, min_["daily_actual_oil_losses"], max_["daily_actual_oil_losses"], key, rows[7], curPd, rate)
 

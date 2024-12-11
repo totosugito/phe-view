@@ -30,9 +30,9 @@ const TabSummaryGas = memo(({values, filterList, selectedItem}) => {
                           height={"450px"}
                           title={"Actual Gas (bbl)"}
                           xLabel={"Date"} yLabel={"Actual Gas (bbl)"} keyX="1"
-                          color1={COLORS_LIST[0]} keyY1={"4"} label1={"Actual Gas"}
-                          color2={COLORS_LIST[1]} keyY2={"10"} label2={t("label.sma7")}
-                          color3={COLORS_LIST[2]} keyY3={"11"} label3={t("label.sma30")}/>
+                          color1={COLORS_LIST[0]} keyY1={"4"} label1={"Actual Gas"} cubicInterpolationMode1={""}
+                          color2={COLORS_LIST[1]} keyY2={"10"} label2={t("label.sma7")} cubicInterpolationMode2={""}
+                          color3={COLORS_LIST[2]} keyY3={"11"} label3={t("label.sma30")} cubicInterpolationMode3={""}/>
           <TableView values={selectedData?.rows} title={selectedData?.name}/>
         </div>
       }

@@ -10,7 +10,7 @@ export const AppRoutes = {
   },
   userLogin: {
     name: "Login",
-    to: "/user/login",
+    to: "/login",
     icon: <RiHome5Fill className={iconClassName}/>,
   },
   productionData: {
@@ -26,7 +26,6 @@ export const AppRoutes = {
   actualOil: {
     name: "Actual Oil",
     to: "/actual-oil",
-      // to: "/",
     icon: <RiHome5Fill className={iconClassName}/>,
   },
   actualGas: {
@@ -39,12 +38,9 @@ export const AppRoutes = {
     to: "/vessel-tracking",
     icon: <RiShip2Line className={iconClassName}/>,
   },
-  // root: {
-  //   name: "Actual Oil",
-  //   to: "/",
-  //   icon: <RiHome5Fill className={iconClassName}/>,
-  // },
 }
+
+export const DefaultUserRouter = AppRoutes.oilLosses.to;
 
 export const AppNavigation = [
   {

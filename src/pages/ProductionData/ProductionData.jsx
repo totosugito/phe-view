@@ -93,35 +93,35 @@ const ProductionData = () => {
             <NavBar title={<div className={"text-lg"}>{AppRoutes.productionData.name}</div>}/>
             {loading ? <WebLoading/> :
                 <BodyContents>
-                    <div className={"flex flex-row gap-x-2 justify-end items-center"}>
-                        <div className={"flex flex-row gap-2 w-full max-w-lg"}>
-                            <input type="file"
-                                   accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
-                                   onChange={onImportClick}
-                                   className="file-input file-input-bordered file-input-sm w-full"/>
-                        </div>
-                        {/*</button>*/}
-                        <div role="button" className="btn btn-ghost btn-circle avatar" onClick={() => {
-                            setConfirmationModal({
-                                title: t("dialog.excelFormatTitle"),
-                                confirmText: t("button.close"),
-                                content: (
-                                    <div>
-                                        <img src={excelFormatImg} alt="" className={"w-full"}/>
-                                    </div>
-                                ),
-                                styles: "w-10/12",
-                                onConfirmClick: () => {
-                                    setConfirmationModal(null);
-                                },
-                                onCancelClick: () => {
-                                    setConfirmationModal(null);
-                                },
-                            })
-                        }}>
-                            <RiQuestionLine className={"text-3xl"}/>
-                        </div>
-                    </div>
+                    {/*<div className={"flex flex-row gap-x-2 justify-end items-center"}>*/}
+                    {/*    <div className={"flex flex-row gap-2 w-full max-w-lg"}>*/}
+                    {/*        <input type="file"*/}
+                    {/*               accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"*/}
+                    {/*               onChange={onImportClick}*/}
+                    {/*               className="file-input file-input-bordered file-input-sm w-full"/>*/}
+                    {/*    </div>*/}
+                    {/*    /!*</button>*!/*/}
+                    {/*    <div role="button" className="btn btn-ghost btn-circle avatar" onClick={() => {*/}
+                    {/*        setConfirmationModal({*/}
+                    {/*            title: t("dialog.excelFormatTitle"),*/}
+                    {/*            confirmText: t("button.close"),*/}
+                    {/*            content: (*/}
+                    {/*                <div>*/}
+                    {/*                    <img src={excelFormatImg} alt="" className={"w-full"}/>*/}
+                    {/*                </div>*/}
+                    {/*            ),*/}
+                    {/*            styles: "w-10/12",*/}
+                    {/*            onConfirmClick: () => {*/}
+                    {/*                setConfirmationModal(null);*/}
+                    {/*            },*/}
+                    {/*            onCancelClick: () => {*/}
+                    {/*                setConfirmationModal(null);*/}
+                    {/*            },*/}
+                    {/*        })*/}
+                    {/*    }}>*/}
+                    {/*        <RiQuestionLine className={"text-3xl"}/>*/}
+                    {/*    </div>*/}
+                    {/*</div>*/}
 
                     <div className="tabs tabs-boxed">
                         <a className={`tab tab-bordered ${activeTab === 0 ? 'tab-active font-bold' : ''}`} onClick={() => handleTabClick(0)}>
