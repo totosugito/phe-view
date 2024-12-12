@@ -37,7 +37,7 @@ const MapControl = ({ children, selectedTile, setSelectedTile }) => {
       {showInput &&
         <div className={"h-screen w-[256px] bg-white p-3 gap-2"}>
           {infoViewMode === "tile" && <ViewTileSelection visible={showInput} setVisible={setShowInput} selectedTile={selectedTile} setSelectedTile={setSelectedTile} />}
-          {children && cloneElement(children, {visible: showInput, setVisible: setShowInput})}
+          {((infoViewMode === "legend") && children) && cloneElement(children, {visible: showInput, setVisible: setShowInput})}
         </div>
       }
     </div>

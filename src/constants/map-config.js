@@ -1,28 +1,32 @@
 export const DEFAULT_MAP_TILE = "opentstreetmap";
-import openStreetMapTile from "src/assets/map/openstreetmap.png";
-import openTopoMapTile from "src/assets/map/opentopomap.png";
-import esriWorldTile from "src/assets/map/esri-world.png";
 export const mapTileList = [
     {
         key: "esri-world",
         name: "Esri Satellite",
         url: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
         attribution: "© Esri © OpenStreetMap Contributors",
-        thumbnail: esriWorldTile
+        thumbnail: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/5/16/25"
     },
     {
         key: "opentstreetmap",
         name: "OpenStreetMap",
         url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
         attribution: "&copy; OpenStreetMap contributors",
-        thumbnail: openStreetMapTile
+        thumbnail: "https://c.tile.openstreetmap.org/5/25/16.png"
     },
     {
         key: "opentopomap",
         name: "OpenTopoMap",
         url: "https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png",
         attribution: "&copy; OpenTopoMap contributors",
-        thumbnail: openTopoMapTile
+        thumbnail: "https://c.tile.opentopomap.org/5/25/16.png"
+    },
+    {
+        key: "google-satellite",
+        name: "Google Satellite",
+        url: "https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}",
+        attribution: "&copy; Google",
+        thumbnail: "https://mt1.google.com/vt/lyrs=s&x=25&y=16&z=5"
     },
 ]
 

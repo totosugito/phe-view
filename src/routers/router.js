@@ -30,7 +30,7 @@ export const AppRoutes = {
   },
   actualGas: {
     name: "Actual Gas",
-    to: "/production-actual-gas",
+    to: "/actual-gas",
     icon: <RiHome5Fill className={iconClassName}/>,
   },
   vesselTracking: {
@@ -40,12 +40,12 @@ export const AppRoutes = {
   },
 }
 
-export const DefaultUserRouter = AppRoutes.oilLosses.to;
+export const DefaultUserRouter = AppRoutes.actualGas.to;
 
 export const AppNavigation = [
   {
     component: "title",
-    name: "GENERAL"
+    name: "MONITOR"
   },
   {
     component: "group",
@@ -53,11 +53,27 @@ export const AppNavigation = [
     to: "/base",
     icon: <LuGlobe className={iconClassName}/>,
     items: [
-      {...AppRoutes.oilLosses, component: "item"},
       {...AppRoutes.actualOil, component: "item"},
       {...AppRoutes.actualGas, component: "item"},
+      {...AppRoutes.oilLosses, component: "item"},
     ]
   },
   {...AppRoutes.productionData, component: "item"},
   {...AppRoutes.vesselTracking, component: "item"},
+  {
+    component: "title",
+    name: "ZARA TOOLS"
+  },
+  {
+    component: "title",
+    name: "DATA MANAGEMENT"
+  },
+  {
+    component: "title",
+    name: "SETTING"
+  },
+  {
+    component: "title",
+    name: "ABOUT"
+  },
 ]

@@ -32,7 +32,7 @@ function App() {
                                 <LayoutOpen navigation={AppNavigation}/>
                             </OpenRoute>
                         }>
-                            <Route path={"/"} element={<OilLosses/>}/>
+                            <Route path={"/"} element={<ActualOil/>}/>
                             <Route path={AppRoutes.productionData.to} element={<ProductionData/>}/>
                             <Route path={AppRoutes.oilLosses.to} element={<OilLosses/>}/>
                             <Route path={AppRoutes.actualOil.to} element={<ActualOil/>}/>
