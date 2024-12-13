@@ -128,7 +128,7 @@ const MapView = ({geoPoints, mode = "rate", onClickDetails}) => {
           attribution={getTileMap(selectedTile)["attribution"]}
           url={getTileMap(selectedTile)["url"]}
         />
-        <MapControl selectedTile={selectedTile} setSelectedTile={setSelectedTile}>
+        <MapControl selectedTile={selectedTile} setSelectedTile={setSelectedTile} initialLegend={true} legendMode={"legend"}>
           <ViewCustomLegend title={t("map.mapLegend")} legends={(mode === "rate") ? mapLegendProductionRate : mapLegendProductionTrend}/>
         </MapControl>
 

@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .my-group-button-base {
-    @apply btn btn-sm btn-neutral bg-neutral-500 text-white
+    @apply p-2 bg-neutral-500 text-white hover:bg-neutral-400 text-base border-[1px] border-neutral-300 mr-[2px]
 }
 .my-group-button-first {
     @apply my-group-button-base rounded-tl-md rounded-tr-md rounded-br-none rounded-bl-none

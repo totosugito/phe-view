@@ -5,10 +5,10 @@ import CompassControl from "./CompassControl.jsx";
 import FullscreenControl from "./FullscreenControl.jsx";
 import ViewTileSelection from "./ViewTileSelection.jsx";
 
-const MapControl = ({ children, selectedTile, setSelectedTile }) => {
+const MapControl = ({ children, selectedTile, setSelectedTile, ...props }) => {
   const map = useMap();
-  const [showInput, setShowInput] = useState(false);
-  const [infoViewMode, setInfoViewMode] = useState("legend");
+  const [showInput, setShowInput] = useState(props?.initialLegend ?? false);
+  const [infoViewMode, setInfoViewMode] = useState(props?.legendMode ?? "legend");
 
   const handleZoomIn = () => {
     map.zoomIn();
@@ -35,7 +35,7 @@ const MapControl = ({ children, selectedTile, setSelectedTile }) => {
         }}><FaCircleInfo /></button>
       </div>
       {showInput &&
-        <div className={"h-screen w-[256px] bg-white p-3 gap-2"}>
+        <div className={"min-h-[300px] w-[200px] bg-white p-2 gap-2 rounded-bl-lg opacity-90"}>
           {infoViewMode === "tile" && <ViewTileSelection visible={showInput} setVisible={setShowInput} selectedTile={selectedTile} setSelectedTile={setSelectedTile} />}
           {((infoViewMode === "legend") && children) && cloneElement(children, {visible: showInput, setVisible: setShowInput})}
         </div>
