@@ -1,7 +1,7 @@
 import CompassControl from "./CompassControl";
 import FullscreenControl from "./FullscreenControl";
 import ViewInfoLayout from "./ViewInfoLayout";
-import ViewTileSelection from "./viewTileSelection";
+import ViewTileSelection from "./ViewTileSelection";
 import MapControl from "./MapControl.js";
 import ViewCustomLegend from "./ViewCustomLegend.jsx";
 
