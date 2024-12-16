@@ -1,4 +1,5 @@
 import {RiHome5Fill, RiDatabase2Line, RiShip2Line} from "react-icons/ri";
+import { TbFileReport } from "react-icons/tb";
 import {LuGlobe} from "react-icons/lu";
 
 const iconClassName = "text-2xl";
@@ -38,6 +39,11 @@ export const AppRoutes = {
     to: "/vessel-tracking",
     icon: <RiShip2Line className={iconClassName}/>,
   },
+  dailyReport: {
+    name: "Daily Report",
+    to: "/daily-report",
+    icon: <RiHome5Fill className={iconClassName}/>,
+  },
 }
 
 export const DefaultUserRouter = AppRoutes.actualGas.to;
@@ -62,7 +68,14 @@ export const AppNavigation = [
   {...AppRoutes.vesselTracking, component: "item"},
   {
     component: "title",
-    name: "ZARA TOOLS"
+    name: "ZARA TOOLS",
+  },
+  {
+    component: "item",
+    name: AppRoutes.dailyReport.name,
+    to: "https://076a-118-137-172-3.ngrok-free.app",
+    target: "_blank",
+    icon: <TbFileReport className={iconClassName}/>,
   },
   {
     component: "title",
