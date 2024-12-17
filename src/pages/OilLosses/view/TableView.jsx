@@ -1,8 +1,8 @@
 import {useTranslation} from "react-i18next";
-import {ColumnHeader, TableData} from "src/components/table/index.js";
+import {ColumnHeader, TableData} from "shared/components/table";
 import {useMemo} from "react";
 import {date_to_string, to_decimal_formatted} from "src/utils/MyUtils.js";
-import {CardLayout} from "src/components/base/index.js";
+import {CardLayout} from "shared/components/base";
 
 const TableView = ({title, values}) => {
   const {t} = useTranslation();

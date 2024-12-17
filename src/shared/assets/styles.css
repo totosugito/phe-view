@@ -1,0 +1,51 @@
+.shared-dialog-title {
+  @apply font-bold text-sm text-center truncate my-1;
+}
+
+.shared-dialog-item-icon {
+  @apply text-2xl;
+}
+
+.shared-dialog-item-label {
+  @apply text-sm text-center;
+}
+
+.shared-group-button-base {
+  @apply p-2 bg-neutral-500 text-white hover:bg-neutral-400 text-base border-[1px] border-neutral-300 mr-[2px]
+}
+
+.shared-group-button-first {
+  @apply shared-group-button-base rounded-tl-md rounded-tr-md rounded-br-none rounded-bl-none
+}
+
+.shared-group-button-mid {
+  @apply shared-group-button-base rounded-none
+}
+
+.shared-group-button-last {
+  @apply shared-group-button-base rounded-tl-none rounded-tr-none rounded-br-md rounded-bl-md
+}
+
+.shared-group-button-self {
+  @apply shared-group-button-base rounded-md
+}
+
+.shared-dialog-title {
+  @apply sm:text-2xl text-lg font-semibold
+}
+
+.shared-dialog-desc {
+  @apply sm:text-base text-sm p-3
+}
+
+.shared-btn-confirm {
+  @apply btn btn-primary btn-sm
+}
+
+.shared-btn-cancel {
+  @apply btn btn-primary btn-sm btn-outline border-neutral-500
+}
+
+.shared-card-container {
+  @apply card border w-full p-3 shadow-sm
+}

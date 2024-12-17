@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useForm } from 'react-hook-form';
 import { FaUserCircle } from 'react-icons/fa';
-import { setUserLogin} from "src/stores/slices/authSlice";
+import { setUserLogin} from "shared/stores/authSlice";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa6";

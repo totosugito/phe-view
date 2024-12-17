@@ -1,7 +1,7 @@
 import {memo, useEffect, useState} from "react";
 import TableView from "./TableView.jsx";
 
-import {COLORS_LIST} from "src/constants/config.js";
+import {COLORS_LIST} from "shared/config/config.js";
 import {ChartLinesView, FilterView} from "src/components/app/index.js";
 import {useTranslation} from "react-i18next";
 

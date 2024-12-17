@@ -18,7 +18,7 @@ export default defineConfig(() => {
       },
       postcss: {
         plugins: [
-          tailwindcss({}),
+          tailwindcss,
           autoprefixer({}), // add options if needed
         ],
       },
@@ -42,6 +42,10 @@ export default defineConfig(() => {
         {
           find: 'src/',
           replacement: `${path.resolve(__dirname, 'src')}/`,
+        },
+        {
+          find: 'shared/',
+          replacement: `${path.resolve(__dirname, 'src/shared')}/`,
         },
       ],
       extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json', '.scss'],

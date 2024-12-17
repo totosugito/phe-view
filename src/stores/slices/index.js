@@ -1,10 +1,9 @@
 import { combineReducers } from "@reduxjs/toolkit"
 
-import authReducer from "./authSlice"
-import sidebarSlice from "./sidebarSlice.js";
+import {authSlice, sidebarSlice} from "shared/stores"
 
 const rootReducer = combineReducers({
-  auth: authReducer,
+  auth: authSlice,
   sidebar: sidebarSlice,
 })
 

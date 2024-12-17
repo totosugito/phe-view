@@ -9,7 +9,7 @@ import {
   mapLegendProductionRate,
   mapLegendProductionTrend
 } from "src/constants/map-config.js";
-import {MapControl, ViewCustomLegend} from "src/components/map/index.js";
+import {MapControl, ViewCustomLegend} from "shared/components/map";
 import {useTranslation} from "react-i18next";
 
 const MapView = ({geoPoints, mode = "rate", onClickDetails}) => {
@@ -129,7 +129,7 @@ const MapView = ({geoPoints, mode = "rate", onClickDetails}) => {
           url={getTileMap(selectedTile)["url"]}
         />
         <MapControl selectedTile={selectedTile} setSelectedTile={setSelectedTile} initialLegend={true} legendMode={"legend"}>
-          <ViewCustomLegend title={t("map.mapLegend")} legends={(mode === "rate") ? mapLegendProductionRate : mapLegendProductionTrend}/>
+          <ViewCustomLegend title={t("shared.mapLegend")} legends={(mode === "rate") ? mapLegendProductionRate : mapLegendProductionTrend}/>
         </MapControl>
 
         {geoPoints &&

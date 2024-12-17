@@ -1,6 +1,6 @@
-import {ChartDoughnut} from "src/components/chart/index.js";
+import {ChartDoughnut} from "shared/components/chart";
 import React, {useEffect} from "react";
-import {CardLayout} from "src/components/base/index.js";
+import {CardLayout} from "shared/components/base";
 
 const DoughnutAreaWellCount = ({values, height="300px"}) => {
   const [colors, setColors] = React.useState([]);

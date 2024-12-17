@@ -1,6 +1,6 @@
 import * as XLSX from "xlsx";
 import {createObjectListFromMap, excelDateToDateObject, excelsCreateGroups} from "src/utils/utils-excel.js";
-import {movingAverage} from "src/utils/smoothing.js";
+import {movingAverage} from "shared/utils/smoothing.js";
 
 const computePlatformsData = (data) => {
     for (let key in data) {

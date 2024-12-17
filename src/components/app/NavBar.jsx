@@ -1,12 +1,12 @@
 import React, {useState} from 'react'
 import {useDispatch, useSelector} from "react-redux";
 import {FiMenu} from "react-icons/fi";
-import {setOpenSideMenu} from "src/stores/slices/sidebarSlice.js";
+import {setOpenSideMenu} from "shared/stores/sidebarSlice.js";
 import {IoPersonOutline} from "react-icons/io5";
-import {ModalDialog} from "src/components/base/index.js";
+import {ModalDialog} from "shared/components/dialog";
 import {useTranslation} from "react-i18next";
 import {useNavigate} from "react-router-dom";
-import {setUserLogin} from "src/stores/slices/authSlice.js";
+import {setUserLogin} from "shared/stores/authSlice.js";
 import {AppRoutes} from "src/routers/router.js";
 
 const NavBar = ({title, left, right}) => {

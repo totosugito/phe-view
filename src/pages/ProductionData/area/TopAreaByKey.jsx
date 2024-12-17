@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import {defaultBarPercentage, defaultBarThickness, defaultChartOptions} from "src/components/chart/ReactChartJs.js";
-import {ChartBar} from "src/components/chart/index.js";
-import {CardLayout} from "src/components/base/index.js";
+import {defaultBarPercentage, defaultBarThickness, defaultChartOptions} from "shared/components/chart/ReactChartJs.js";
+import {ChartBar} from "shared/components/chart";
+import {CardLayout} from "shared/components/base";
 
 const TopAreaByKey = ({ values, height="300px", borderRadius=0, keyPlot="sum",
                         title="", xlabel="", ylabel="", color="blue" }) => {

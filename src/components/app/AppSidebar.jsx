@@ -3,10 +3,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { APP_NAME } from "src/constants/config";
 import WebLogo from "src/assets/logo.png";
 import WavivLogo from "src/assets/images/waviv.png";
-import { setOpenSideMenu, setScreenSize } from "src/stores/slices/sidebarSlice";
+import { setOpenSideMenu, setScreenSize } from "shared/stores/sidebarSlice";
 import { IoMdClose } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
-import {SidebarLink} from "src/components/base";
+import {SidebarLink} from "shared/components/base";
 
 const AppSidebar = ({ navigation }) => {
   const navigate = useNavigate();

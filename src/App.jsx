@@ -1,15 +1,26 @@
 import {Suspense} from 'react'
-import './i18n';
+import 'src/i18n';
 import {useTranslation} from "react-i18next";
-import './assets/styles.css'
+import 'src/assets/styles.scss'
 import {Route, Routes} from "react-router-dom";
 import {useSelector} from "react-redux";
-import OpenRoute from "./components/auth/OpenRoute.jsx";
 import {LayoutOpen} from "src/components/app/index.js";
-import {ProductionData, OilLosses, Page404, ActualOil, ActualGas, VesselTracking, Login} from "./pages/index.js";
-import {AppNavigation, AppRoutes} from "src/routers/router.js";
-import {WebLoading} from "src/components/base/index.js";
+import {
+    ProductionData,
+    OilLosses,
+    Page404,
+    ActualOil,
+    ActualGas,
+    VesselTracking,
+    Login,
+    PotentialOil,
+    PotentialGas
+} from "src/pages/index.js";
+import {WebLoading} from "shared/components/base";
 import {DEMO_USER} from "src/constants/config.js";
+import {AppNavigation} from "src/routers/userNav.js";
+import {AppRoutes} from "src/routers/router.js";
+import ProtectedRoute from "./shared/components/auth/ProtectedRoute.jsx";
 
 function App() {
     const {t} = useTranslation();
@@ -28,20 +39,22 @@ function App() {
 
                     {(user === DEMO_USER.email) &&
                         <Route element={
-                            <OpenRoute>
+                            <ProtectedRoute>
                                 <LayoutOpen navigation={AppNavigation}/>
-                            </OpenRoute>
+                            </ProtectedRoute>
                         }>
-                            <Route path={"/"} element={<ActualOil/>}/>
-                            <Route path={AppRoutes.productionData.to} element={<ProductionData/>}/>
-                            <Route path={AppRoutes.oilLosses.to} element={<OilLosses/>}/>
-                            <Route path={AppRoutes.actualOil.to} element={<ActualOil/>}/>
-                            <Route path={AppRoutes.actualGas.to} element={<ActualGas/>}/>
-                            <Route path={AppRoutes.vesselTracking.to} element={<VesselTracking/>}/>
+                            <Route path={AppRoutes.root.href} element={<ActualOil/>}/>
+                            <Route path={AppRoutes.productionData.href} element={<ProductionData/>}/>
+                            <Route path={AppRoutes.oilLosses.href} element={<OilLosses/>}/>
+                            <Route path={AppRoutes.actualOil.href} element={<ActualOil/>}/>
+                            <Route path={AppRoutes.actualGas.href} element={<ActualGas/>}/>
+                            <Route path={AppRoutes.vesselTracking.href} element={<VesselTracking/>}/>
+                            <Route path={AppRoutes.potentialOil.href} element={<PotentialOil/>}/>
+                            <Route path={AppRoutes.potentialGas.href} element={<PotentialGas/>}/>
                         </Route>
                     }
 
-                    <Route path={"/"} element={<Login/>}/>
+                    <Route path={AppRoutes.root.href} element={<Login/>}/>
                     <Route path={AppRoutes.userLogin.to} element={<Login/>}/>
                 </Routes>
             </Suspense>

@@ -1,12 +1,13 @@
-import {AppFooter, BodyContents, ModalDialog, WebLoading} from "src/components/base/index.js";
+import {BodyContents, WebLoading} from "shared/components/base";
+import {AppFooter} from "src/components/app";
+import {ModalDialog} from "shared/components/dialog";
 import {useEffect, useState} from "react";
-import Worker from "../../utils/excelProductionDataWorker?worker";
+import Worker from "src/utils/excelProductionDataWorker?worker";
 import {toast} from "react-hot-toast";
 import TabAreaSummary from "./view/TabAreaSummary.jsx";
 import TabWellSummary from "src/pages/ProductionData/view/TabWellSummary.jsx";
 import {NavBar} from "src/components/app/index.js";
 import excelFormatImg from "src/assets/images/excel-format.png";
-import {RiQuestionLine} from "react-icons/ri";
 import {useTranslation} from "react-i18next";
 import {AppRoutes} from "src/routers/router.js";
 

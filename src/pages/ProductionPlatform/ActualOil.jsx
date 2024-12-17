@@ -1,10 +1,10 @@
 import {NavBar} from "src/components/app/index.js";
 import {AppRoutes} from "src/routers/router.js";
-import {BodyContents, WebLoading} from "src/components/base/index.js";
+import {BodyContents, WebLoading} from "shared/components/base";
 import {useTranslation} from "react-i18next";
 import {useEffect, useState} from "react";
 import {geoJsonPointsToArray} from "src/utils/utils-map.js";
-import Worker from "../../utils/excelProductionPlatformWorker?worker";
+import Worker from "src/utils/excelProductionPlatformWorker?worker";
 import {toast} from "react-hot-toast";
 import {computeDataSummary, fillGeojsonDataWithSummary} from "src/utils/excelProductionPlatform.js";
 import TabRate from "./view/TabRate.jsx";
@@ -12,7 +12,7 @@ import TabTrend from "./view/TabTrend.jsx";
 import TabSummaryOil from "./view/TabSummaryOil.jsx";
 import {date_to_string} from "src/utils/MyUtils.js";
 
-const ActualOil = ({title="Actual Oil", idxData = 2, idxSma7 = 10, idxSma30 = 11}) => {
+const ActualOil = ({title="Actual Oil", idxData = 2, idxSma7 = 10, idxSma30 = 11, idxActual = -1}) => {
   const {t} = useTranslation();
   const [loading, setLoading] = useState(false);
   const [xlsxRowStart, setXlsxRowStart] = useState(1);
@@ -52,7 +52,7 @@ const ActualOil = ({title="Actual Oil", idxData = 2, idxSma7 = 10, idxSma30 = 11
       // Initialize the worker
       const worker = new Worker();
 
-      worker.postMessage({fileContent, xlsxRowStart, xlsxRowEnd, xlsxColStart, xlsxColEnd, idxData, idxSma7, idxSma30});
+      worker.postMessage({fileContent, xlsxRowStart, xlsxRowEnd, xlsxColStart, xlsxColEnd, idxData, idxSma7, idxSma30, idxActual});
 
       // Handle messages from the worker
       worker.onmessage = async function (event) {
@@ -128,7 +128,7 @@ const ActualOil = ({title="Actual Oil", idxData = 2, idxSma7 = 10, idxSma30 = 11
                   <TabTrend values={filteredData} onClickDetails={onClickDetails} title={title}/>
                 </div>
                 <div className={`flex flex-grow w-full h-full ${activeTab === 2 ? '' : 'hidden'}`}>
-                  <TabSummaryOil values={data.groups} filterList={data.summary.keys} selectedItem={selectedItem}/>
+                  <TabSummaryOil values={data.groups} filterList={data.summary.keys} selectedItem={selectedItem} labelKey={"Actual Oil"}/>
                 </div>
               </div>
             }

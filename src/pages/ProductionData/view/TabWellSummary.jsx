@@ -3,7 +3,7 @@ import FilterView from "src/pages/ProductionData/well/FilterView.js";
 import WellCardSummary from "src/pages/ProductionData/well/WellCardSummary.jsx";
 import TableWell from "src/pages/ProductionData/well/TableWell.jsx";
 import ChartLineView from "src/pages/ProductionData/well/ChartLineView.js";
-import {COLORS_LIST} from "src/constants/config.js";
+import {COLORS_LIST} from "shared/config/config.js";
 
 const TabWellSummary = memo(({raw, values}) => {
   const [filterDropdown, setFilterDropdown] = useState(null);

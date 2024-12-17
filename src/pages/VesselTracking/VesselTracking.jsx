@@ -1,6 +1,7 @@
 import {NavBar} from "src/components/app/index.js";
 import {AppRoutes} from "src/routers/router.js";
-import {AppFooter, BodyContents, WebLoading} from "src/components/base/index.js";
+import {BodyContents, WebLoading} from "shared/components/base";
+import {AppFooter} from "src/components/app";
 import {useTranslation} from "react-i18next";
 import {useState} from "react";
 

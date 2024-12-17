@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from "react";
-import {ChartLine} from "src/components/chart";
-import {defaultChartOptions} from "src/components/chart/ReactChartJs";
+import {ChartLine} from "shared/components/chart";
+import {defaultChartOptions} from "shared/components/chart/ReactChartJs";
 import {useTranslation} from "react-i18next";
-import {CardLayout} from "src/components/base/index.js";
+import {CardLayout} from "shared/components/base";
 import {scales} from "chart.js";
 import {date_to_string} from "src/utils/MyUtils.js";
 

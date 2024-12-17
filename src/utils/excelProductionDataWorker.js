@@ -1,6 +1,6 @@
 import * as XLSX from "xlsx";
 import {excelDateToDateObject} from "src/utils/utils-excel.js";
-import {movingAverage} from "src/utils/smoothing.js";
+import {movingAverage} from "shared/utils/smoothing.js";
 
 function areaSummary(data) {
   // Initialize an empty object to store the summary

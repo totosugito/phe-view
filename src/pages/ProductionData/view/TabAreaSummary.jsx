@@ -4,7 +4,7 @@ import DoughnutAreaWellCount from "src/pages/ProductionData/area/DoughnutAreaWel
 import TopAreaByKey from "src/pages/ProductionData/area/TopAreaByKey.jsx";
 import {memo} from "react";
 import TableWell from "src/pages/ProductionData/area/TableWell.jsx";
-import {COLORS_LIST} from "src/constants/config.js";
+import {COLORS_LIST} from "shared/config/config.js";
 import {ChartLinesView} from "src/components/app/index.js";
 import {useTranslation} from "react-i18next";
 

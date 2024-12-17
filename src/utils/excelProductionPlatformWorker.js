@@ -1,8 +1,8 @@
 import * as XLSX from "xlsx";
 import {createObjectListFromMap, excelDateToDateObject, excelsCreateGroups} from "src/utils/utils-excel.js";
-import {movingAverage} from "src/utils/smoothing.js";
+import {movingAverage} from "shared/utils/smoothing.js";
 
-const computePlatformsData = (data, idxData, idxSma7, idxSma30) => {
+const computePlatformsData = (data, idxData, idxSma7, idxSma30, idxActual) => {
     for (let key in data) {
         let rows = data[key].rows;
         let rowsCount = data[key].count;
@@ -10,9 +10,6 @@ const computePlatformsData = (data, idxData, idxSma7, idxSma30) => {
         let actual_oil = [];
         for (let i = 0; i < rowsCount; i++) {
             let row = rows[i];
-            // if(!row[idxData]) {
-            //     continue;
-            // }
             actual_oil.push(row[idxData]);
         }
         const actual_oil_sma7 = movingAverage(actual_oil, 7);
@@ -23,13 +20,18 @@ const computePlatformsData = (data, idxData, idxSma7, idxSma30) => {
             let row = rows[i];
             row[idxSma7] = actual_oil_sma7[i];  // actual oil SMA7
             row[idxSma30] = actual_oil_sma30[i];  // actual oil SMA30
+
+            if(idxActual > -1) {
+                row[idxSma30 + 1] = row[idxData] - row[idxActual];  // delta
+                row[idxSma30 + 2] = 100.0 - ((row[idxSma30 + 1]/row[idxData]) * 100);  // percentage
+            }
         }
     }
     return data;
 }
 
 self.onmessage = function (e) {
-    const {fileContent, xlsxRowStart, xlsxRowEnd, xlsxColStart, xlsxColEnd, idxData, idxSma7, idxSma30} = e.data;
+    const {fileContent, xlsxRowStart, xlsxRowEnd, xlsxColStart, xlsxColEnd, idxData, idxSma7, idxSma30, idxActual} = e.data;
 
     try {
         // Parse the Excel file
@@ -82,7 +84,7 @@ self.onmessage = function (e) {
 
         let platforms = excelsCreateGroups(jsonData, 0);  // grouping data by platform
         const keys = createObjectListFromMap(platforms); // create list of keys from platforms list.
-        platforms = computePlatformsData(platforms, idxData, idxSma7, idxSma30);
+        platforms = computePlatformsData(platforms, idxData, idxSma7, idxSma30, idxActual);
 
         // ------------ create data summary ------------
         const obj = {

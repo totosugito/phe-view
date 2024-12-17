@@ -1,10 +1,10 @@
 import {NavBar} from "src/components/app/index.js";
 import {AppRoutes} from "src/routers/router.js";
-import {BodyContents, WebLoading} from "src/components/base/index.js";
+import {BodyContents, WebLoading} from "shared/components/base";
 import {useTranslation} from "react-i18next";
 import {useEffect, useState} from "react";
 import {geoJsonPointsToArray} from "src/utils/utils-map.js";
-import Worker from "../../utils/excelOilLossesWorker?worker";
+import Worker from "src/utils/excelOilLossesWorker?worker";
 import {toast} from "react-hot-toast";
 import {computeDataSummary, fillGeojsonDataWithSummary} from "src/utils/excelOilLosses.js";
 import TabRate from "./view/TabRate.jsx";
