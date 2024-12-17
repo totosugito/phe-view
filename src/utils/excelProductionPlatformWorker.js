@@ -23,7 +23,14 @@ const computePlatformsData = (data, idxData, idxSma7, idxSma30, idxActual) => {
 
             if(idxActual > -1) {
                 row[idxSma30 + 1] = row[idxData] - row[idxActual];  // delta
-                row[idxSma30 + 2] = 100.0 - ((row[idxSma30 + 1]/row[idxData]) * 100);  // percentage
+                if(row[idxData] === 0) {
+                    row[idxSma30 + 2] = 0;
+                }
+                else {
+                    // row[idxSma30 + 2] = 100.0 - ((row[idxSma30 + 1] / row[idxData]) * 100);  // percentage
+                    row[idxSma30 + 2] = (row[idxActual] / row[idxData]) * 100.0;  // percentage
+                    // row[idxSma30 + 2] = 10;
+                }
             }
         }
     }

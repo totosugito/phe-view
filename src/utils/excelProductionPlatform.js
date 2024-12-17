@@ -24,6 +24,10 @@ export const fillGeojsonDataWithSummaryCustom = ({geoPoints, summary, idxData, i
   for (let i = 0; i < geoPoints.length; i++) {
     let geoPoint = geoPoints[i];
     let summaryData = summary.data[geoPoint.name];
+    // if(geoPoint.name === "Sundari A") {
+    //   console.log(summaryData)
+    //   console.log(summaryData.rows[props.idxActual], summaryData.rows[props.idxData])
+    // }
     if(summaryData) {
       geoPoint.rate = summaryData.rate;
       geoPoint.trend = summaryData.trend;
@@ -180,7 +184,7 @@ export const computeDataSummaryAndGroupsBy = (data, colIndex, colValue, idxData,
   let groupSummary = {}
   for (let item in dataFound) {
     let row = dataFound[item];
-    row[idxOutDelta] = row[idxData] - row[idxActual];
+    // row[idxOutDelta] = row[idxData] - row[idxActual];
 
     // // prevent division by zero
     // if(row[idxData] > 0) {

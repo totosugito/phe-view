@@ -66,7 +66,6 @@ const PotentialGas = ({title = "Potential Gas", idxData = 7, idxSma7 = 10, idxSm
           // 11 : avg30
           // 12 : delta
           // 13 : percentage
-          const idxActual = "2";
           const dataSummary = computeDataSummaryAndGroupsBy(data.groups, 1, selectedDay, idxData, idxSma7, idxSma30,
             "9", idxActual);
 
@@ -80,6 +79,8 @@ const PotentialGas = ({title = "Potential Gas", idxData = 7, idxSma7 = 10, idxSm
               idxSma7: idxSma7, idxSma30: idxSma30, idxActual: idxActual, idxDelta: 12, idxPercentage: 13
             });
 
+          // console.log(dataSummary)
+          // console.log(selected)
           setData(data); // Set the processed data
           setFilteredData(selected);
           setSelectedItem("Rama B");
