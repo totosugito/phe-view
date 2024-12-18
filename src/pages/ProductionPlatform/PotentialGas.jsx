@@ -79,6 +79,8 @@ const PotentialGas = ({title = "Potential Gas", idxData = 7, idxSma7 = 10, idxSm
               idxSma7: idxSma7, idxSma30: idxSma30, idxActual: idxActual, idxDelta: 12, idxPercentage: 13
             });
 
+          // console.log(dataSummary)
+          // console.log(selected)
           setData(data); // Set the processed data
           setFilteredData(selected);
           setSelectedItem("Rama B");
