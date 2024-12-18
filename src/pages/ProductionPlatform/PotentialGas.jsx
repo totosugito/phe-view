@@ -66,7 +66,6 @@ const PotentialGas = ({title = "Potential Gas", idxData = 7, idxSma7 = 10, idxSm
           // 11 : avg30
           // 12 : delta
           // 13 : percentage
-          const idxActual = "2";
           const dataSummary = computeDataSummaryAndGroupsBy(data.groups, 1, selectedDay, idxData, idxSma7, idxSma30,
             "9", idxActual);
 
@@ -114,14 +113,14 @@ const PotentialGas = ({title = "Potential Gas", idxData = 7, idxSma7 = 10, idxSm
 
   return (
     <div className={"h-screen flex flex-col"}>
-      <NavBar title={<div className={"text-lg"}><span className={"mr-2"}>{AppRoutes.potentialOil.name}</span><span
+      <NavBar title={<div className={"text-lg"}><span className={"mr-2"}>{AppRoutes.potentialGas.name}</span><span
         className={"text-primary font-bold"}>{date_to_string(selectedDay, "dd/MM/yyyy")}</span></div>}/>
       {loading ? <WebLoading/> :
         <BodyContents>
           <div className={"flex flex-col flex-grow h-full w-full"}>
             <div className="tabs tabs-boxed">
               <a className={`tab tab-bordered ${activeTab === 0 ? 'tab-active font-bold' : ''}`} onClick={() => handleTabClick(0)}>
-                Rate
+                Potential
               </a>
               <a className={`tab tab-bordered ${activeTab === 1 ? 'tab-active font-bold' : ''}`} onClick={() => handleTabClick(1)}>
                 Performance

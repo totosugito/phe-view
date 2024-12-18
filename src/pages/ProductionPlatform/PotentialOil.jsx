@@ -61,13 +61,11 @@ const PotentialOil = ({title = "Potential Oil", idxData = 5, idxSma7 = 10, idxSm
       worker.onmessage = async function (event) {
         const {status, data, error} = event.data;
 
-        console.log(data)
         if (status) {
           // 10 : avg7
           // 11 : avg30
           // 12 : delta
           // 13 : percentage
-          const idxActual = "2";
           const dataSummary = computeDataSummaryAndGroupsBy(data.groups, 1, selectedDay, idxData, idxSma7, idxSma30,
             "9", idxActual);
 
@@ -122,7 +120,7 @@ const PotentialOil = ({title = "Potential Oil", idxData = 5, idxSma7 = 10, idxSm
           <div className={"flex flex-col flex-grow h-full w-full"}>
             <div className="tabs tabs-boxed">
               <a className={`tab tab-bordered ${activeTab === 0 ? 'tab-active font-bold' : ''}`} onClick={() => handleTabClick(0)}>
-                Rate
+                Potential
               </a>
               <a className={`tab tab-bordered ${activeTab === 1 ? 'tab-active font-bold' : ''}`} onClick={() => handleTabClick(1)}>
                 Performance

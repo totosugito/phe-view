@@ -3,6 +3,7 @@ import react from '@vitejs/plugin-react'
 import path from 'node:path'
 import autoprefixer from 'autoprefixer'
 import tailwindcss from "tailwindcss";
+// import NodePolyfills from 'vite-plugin-node-polyfills';
 
 export default defineConfig(() => {
   return {
@@ -36,9 +37,16 @@ export default defineConfig(() => {
         },
       },
     },
-    plugins: [react()],
+    plugins: [
+      react(),
+      // NodePolyfills,
+    ],
     resolve: {
       alias: [
+        {
+          find: 'stream', // Add the alias for `stream`
+          replacement: 'stream-browserify',
+        },
         {
           find: 'src/',
           replacement: `${path.resolve(__dirname, 'src')}/`,

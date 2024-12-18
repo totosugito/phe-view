@@ -89,7 +89,7 @@ export const mapLegendProductionTrend = [
         key: "poor",
         view: "circle",
         name: "Down",
-        bgColor: "#FF0000",
+        bgColor: "#CC0AC3",
         borderColor: "#000000",
         min: 0.25,
         size: "16px"
@@ -99,7 +99,7 @@ export const mapLegendProductionTrend = [
         key: "fair",
         view: "circle",
         name: "Semi-Down",
-        bgColor: "#FFA500",
+        bgColor: "#FF1FCE",
         borderColor: "#000000",
         min: 0.5,
         size: "16px"
@@ -109,7 +109,7 @@ export const mapLegendProductionTrend = [
         key: "good",
         view: "circle",
         name: "Semi-Up",
-        bgColor: "#32CD32",
+        bgColor: "#008DFF",
         borderColor: "#000000",
         min: 0.75,
         size: "16px"
@@ -119,7 +119,60 @@ export const mapLegendProductionTrend = [
         key: "excellent",
         view: "circle",
         name: "Up",
-        bgColor: "#008000",
+        bgColor: "#0056FE",
+        borderColor: "#000000",
+        min: 1,
+        size: "16px"
+    },
+];
+
+export const mapLegendProductionPerformance = [
+    {
+        id: 0,
+        key: "poor",
+        view: "circle",
+        name: "Poor",
+        bgColor: "#CC0AC3",
+        borderColor: "#000000",
+        min: 0.25,
+        size: "16px"
+    },
+    {
+        id: 1,
+        key: "fair",
+        view: "circle",
+        name: "Fair",
+        bgColor: "#FFC0CB",
+        borderColor: "#000000",
+        min: 0.5,
+        size: "16px"
+    },
+    {
+        id: 2,
+        key: "good",
+        view: "circle",
+        name: "Good",
+        bgColor: "#00BFFF",
+        borderColor: "#000000",
+        min: 0.75,
+        size: "16px"
+    },
+    {
+        id: 3,
+        key: "excellent",
+        view: "circle",
+        name: "Excellent",
+        bgColor: "#0056FE",
+        borderColor: "#000000",
+        min: 1,
+        size: "16px"
+    },
+    {
+        id: 4,
+        key: "inactive",
+        view: "circle",
+        name: "Inactive",
+        bgColor: "#ABABAB",
         borderColor: "#000000",
         min: 1,
         size: "16px"

@@ -9,3 +9,4 @@ export const ActualGas = React.lazy(() => import("./ProductionPlatform/ActualGas
 export const VesselTracking = React.lazy(() => import("./VesselTracking/VesselTracking.jsx"));
 export const PotentialOil = React.lazy(() => import("./ProductionPlatform/PotentialOil.jsx"));
 export const PotentialGas = React.lazy(() => import("./ProductionPlatform/PotentialGas.jsx"));
+export const EmailMsgList = React.lazy(() => import("./EmailMsgList/EmailMsgList.jsx"));

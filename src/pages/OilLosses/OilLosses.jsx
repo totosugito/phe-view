@@ -108,7 +108,7 @@ const OilLosses = ({}) => {
           <div className={"flex flex-col flex-grow h-full w-full"}>
             <div className="tabs tabs-boxed">
               <a className={`tab tab-bordered ${activeTab === 0 ? 'tab-active font-bold' : ''}`} onClick={() => handleTabClick(0)}>
-                Rate
+                Production
               </a>
               <a className={`tab tab-bordered ${activeTab === 1 ? 'tab-active font-bold' : ''}`} onClick={() => handleTabClick(1)}>
                 Trend

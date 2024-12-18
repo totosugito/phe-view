@@ -67,6 +67,12 @@ export const AppRoutes = {
     href: "/potential-gas",
     icon: <RiHome5Fill className={iconClassName}/>,
   },
+  emailMsgList: {
+    name: "Email Message List",
+    to: "/email-msg-list",
+    href: "/email-msg-list",
+    icon: <RiHome5Fill className={iconClassName}/>,
+  },
 }
 
 export const DefaultUserRouter = AppRoutes.actualGas.to;
