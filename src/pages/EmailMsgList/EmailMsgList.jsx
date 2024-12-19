@@ -41,15 +41,10 @@ const EmailMsgList = ({}) => {
     <div className={"h-screen flex flex-col p-2"}>
       <div className="container py-5">
         <div className="max-w-6xl mx-auto bg-white shadow-lg rounded-lg">
-          <div className="p-4 border-b border-gray-200">
-            <input type="file" id="fileInput" className="mt-4 p-2 border border-gray-300 rounded d-none"/>
-            <div id="dropZone" className="p-5 text-gray-600"> Drop the *.msg file here or click to select a file</div>
-          </div>
-          <div id="emailViewer" className="p-4"></div>
-          <div
-              dangerouslySetInnerHTML={{__html: htmlContent}}
-              style={{marginTop: "20px", border: "1px solid #ccc", padding: "10px"}}
-          ></div>
+          {/*<div*/}
+          {/*    dangerouslySetInnerHTML={{__html: htmlContent}}*/}
+          {/*    style={{marginTop: "20px", border: "1px solid #ccc", padding: "10px"}}*/}
+          {/*></div>*/}
         </div>
       </div>
     </div>)
