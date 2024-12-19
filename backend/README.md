@@ -32,3 +32,10 @@
 | DHP    | Downhole problem      | sedang ada masalah di bor nya  |
 | T      | Temporarily abandoned | sementara ditinggalkan         |
 | A      | Abandoned             | sudah ditinggalkan             |
+
+## LINUX INSTALLATION
+1. python -m venv venv
+2. source venv/bin/activate
+3. pip install -r requirements.txt
+4. python app-server.py or
+5. pm2 start "gunicorn -w 1 -b 0.0.0.0:5157 app-server:app" --name phe-view-server
