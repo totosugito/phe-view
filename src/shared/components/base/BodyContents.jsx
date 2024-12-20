@@ -1,6 +1,8 @@
-const BodyContents = ({children}) => {
+import {twMerge} from "tailwind-merge";
+
+const BodyContents = ({children, ...props}) => {
   return(
-    <div className={'pt-[7px] pb-[7px] pl-[7px] pr-[14px] flex-1'}>
+    <div className={twMerge("shared-body-contents", props?.className)}>
       {children}
     </div>
   )

@@ -11,9 +11,9 @@ const BigInfoLabel = ({ title, value, style, asMoney=false, prefix="", precision
   };
   return (
     <>
-      <div className={"my-card-container flex flex-col w-full items-center justify-items-center"}>
+      <div className={"shared-card-container flex flex-col w-full items-center justify-items-center"}>
         <div className={"md:text-sm text-xs text-center truncate"}>{title}</div>
-        <div className={`sm:text-4xl text-3xl font-bold py-2 ${style}`}>
+        <div className={`sm:text-4xl text-3xl font-bold py-1 ${style}`}>
           {getValue()}
         </div>
       </div>

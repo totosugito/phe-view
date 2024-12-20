@@ -106,8 +106,8 @@ const ActualOil = ({title="Actual Oil", idxData = 2, idxSma7 = 10, idxSma30 = 11
         className={"text-primary font-bold"}>{date_to_string(selectedDay, "dd/MM/yyyy")}</span></div>}/>
       {loading ? <WebLoading/> :
         <BodyContents>
-          <div className={"flex flex-col flex-grow h-full w-full"}>
-            <div className="tabs tabs-boxed">
+          <div className={"flex flex-col flex-grow h-full w-full gap-2"}>
+            <div className="tabs tabs-boxed bg-base-100">
               <a className={`tab tab-bordered ${activeTab === 0 ? 'tab-active font-bold' : ''}`} onClick={() => handleTabClick(0)}>
                 Actual
               </a>

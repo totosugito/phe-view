@@ -118,7 +118,7 @@ const PotentialOil = ({title = "Potential Oil", idxData = 5, idxSma7 = 10, idxSm
       {loading ? <WebLoading/> :
         <BodyContents>
           <div className={"flex flex-col flex-grow h-full w-full"}>
-            <div className="tabs tabs-boxed">
+            <div className="tabs tabs-boxed bg-base-100">
               <a className={`tab tab-bordered ${activeTab === 0 ? 'tab-active font-bold' : ''}`} onClick={() => handleTabClick(0)}>
                 Potential
               </a>

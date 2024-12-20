@@ -14,7 +14,8 @@ import {
     VesselTracking,
     Login,
     PotentialOil,
-    PotentialGas, EmailMsgList
+    PotentialGas, EmailMsgList,
+    WellProd2024ActualOil
 } from "src/pages/index.js";
 import {WebLoading} from "shared/components/base";
 import {DEMO_USER} from "src/constants/config.js";
@@ -52,6 +53,7 @@ function App() {
                             <Route path={AppRoutes.potentialOil.href} element={<PotentialOil/>}/>
                             <Route path={AppRoutes.potentialGas.href} element={<PotentialGas/>}/>
                             <Route path={AppRoutes.emailMsgList.href} element={<EmailMsgList/>}/>
+                            <Route path={AppRoutes.wellProd2024.actualOil.href} element={<WellProd2024ActualOil/>}/>
                         </Route>
                     }
 

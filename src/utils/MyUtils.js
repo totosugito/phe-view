@@ -172,3 +172,7 @@ export function filterObjectByListKeys(obj, keys) {
     Object.entries(obj).filter(([key]) => keys.includes(key))
   );
 }
+
+export function simpleReformatText(text) {
+  return text.replace(/_/g, " ");
+}

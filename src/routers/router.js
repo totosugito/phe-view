@@ -73,6 +73,26 @@ export const AppRoutes = {
     href: "/email-msg-list",
     icon: <RiHome5Fill className={iconClassName}/>,
   },
+  wellProd2024: {
+    actualOil: {
+      name: "Actual Oil",
+      to: "/well-prod2024/actual-oil",
+      href: "/well-prod2024/actual-oil",
+      icon: <RiHome5Fill className={iconClassName}/>,
+    },
+    actualGas: {
+      name: "Actual Gas",
+      to: "/well-prod2024/actual-gas",
+      href: "/well-prod2024/actual-gas",
+      icon: <RiHome5Fill className={iconClassName}/>,
+    },
+    actualWater: {
+      name: "Actual Water",
+      to: "/well-prod2024/actual-water",
+      href: "/well-prod2024/actual-water",
+      icon: <RiHome5Fill className={iconClassName}/>,
+    },
+  }
 }
 
 export const DefaultUserRouter = AppRoutes.actualGas.to;

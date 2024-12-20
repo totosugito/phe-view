@@ -107,7 +107,7 @@ const ActualGas = ({title="Actual Gas", idxData = 4, idxSma7 = 10, idxSma30 = 11
       {loading ? <WebLoading/> :
         <BodyContents>
           <div className={"flex flex-col flex-grow h-full w-full"}>
-            <div className="tabs tabs-boxed">
+            <div className="tabs tabs-boxed bg-base-100">
               <a className={`tab tab-bordered ${activeTab === 0 ? 'tab-active font-bold' : ''}`} onClick={() => handleTabClick(0)}>
                 Actual
               </a>

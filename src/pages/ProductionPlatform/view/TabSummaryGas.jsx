@@ -4,8 +4,9 @@ import TableView from "./TableView.jsx";
 import {COLORS_LIST} from "shared/config/config.js";
 import {ChartLinesView, FilterView} from "src/components/app/index.js";
 import {useTranslation} from "react-i18next";
+import {CardLayout} from "shared/components/base/index.js";
 
-const TabSummaryGas = memo(({values, filterList, selectedItem, labelKey=""}) => {
+const TabSummaryGas = memo(({values, filterList, selectedItem, labelKey = ""}) => {
   const {t} = useTranslation();
   const [filterDropdown, setFilterDropdown] = useState(null);
   const [selectedData, setSelectedData] = useState(null);
@@ -20,12 +21,14 @@ const TabSummaryGas = memo(({values, filterList, selectedItem, labelKey=""}) => 
   }
 
   return (
-    <div className={"flex flex-col flex-grow w-full h-full gap-3"}>
-      {filterList && <FilterView values={filterList} onChange={filterOnChange}/>}
-      <div className={"text-center text-2xl font-bold text-primary"}>{selectedData?.name}</div>
+    <div className={"flex flex-col flex-grow w-full h-full gap-2"}>
+      <CardLayout>
+        {filterList && <FilterView values={filterList} onChange={filterOnChange}/>}
+        <div className={"text-center text-2xl font-bold text-primary"}>{selectedData?.name}</div>
+      </CardLayout>
 
       {selectedData &&
-        <div className={"flex flex-col gap-3"}>
+        <div className={"flex flex-col gap-2"}>
           <ChartLinesView values={selectedData?.rows ?? []}
                           height={"450px"}
                           title={labelKey}

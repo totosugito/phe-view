@@ -1,7 +1,9 @@
-const CardLayout = ({ title, rightTitle, children, height }) => {
+import {twMerge} from "tailwind-merge";
+
+const CardLayout = ({ title, rightTitle, children, height, ...props }) => {
   return (
     <>
-      <div className={"shared-card-container"} style={{height: height ?? ""}}>
+      <div className={twMerge("shared-card-container", props?.className)} style={{height: height ?? ""}}>
         <div className={"flex flex-row justify-between w-full pb-0"}>
           <div className="text-lg font-bold truncate">{title}</div>
           {rightTitle && <div className={"text-end"}>{rightTitle}</div>}

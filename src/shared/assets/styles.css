@@ -47,5 +47,9 @@
 }
 
 .shared-card-container {
-  @apply card border w-full p-3 shadow-sm
+  @apply card border w-full p-3 shadow-sm gap-y-2 bg-base-100
+}
+
+.shared-body-contents {
+  @apply p-2 gap-2 flex-1 bg-base-200
 }

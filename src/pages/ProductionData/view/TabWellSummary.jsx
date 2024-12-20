@@ -9,7 +9,7 @@ const TabWellSummary = memo(({raw, values}) => {
   const [filterDropdown, setFilterDropdown] = useState(null);
   const [well, setWell] = useState(null);
   const [data, setData] = useState(null);
-  const styleRowGroup = "grid md:grid-cols-2 grid-cols-1 gap-3";
+  const styleRowGroup = "grid md:grid-cols-2 grid-cols-1 gap-2";
 
   useEffect(() => {
     initData();
@@ -36,11 +36,13 @@ const TabWellSummary = memo(({raw, values}) => {
   }
 
   return(
-    <div className={"flex flex-col gap-3"}>
+    <div className={"flex flex-col gap-2 "}>
+      <div className={"bg-base-100 rounded-lg"}>
       {filterDropdown && <FilterView values={filterDropdown} onChange={filterOnChange}/>}
-      <div className={"text-center text-2xl font-bold text-primary my-3"}>{well?.well}</div>
+      <div className={"text-center text-2xl font-bold text-primary my-2"}>{well?.well}</div>
       {well && <WellCardSummary values={well}/>}
-      {data && <div className={"flex flex-col gap-3"}>
+      </div>
+      {data && <div className={"flex flex-col gap-2"}>
 
         <div className={styleRowGroup}>
           <ChartLineView values={data ?? []} title={"Time vs Oil (bbl)"}

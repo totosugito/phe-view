@@ -6,14 +6,16 @@ class LibWellProduction:
 
     data = {
         "region": {
-            "list": {},
-            "summary": {},
-            "best": {},
+            "list": [],
+            "details": {},
+            "best_platform": {},
+            "summary": {}
         },
         "platform": {
-            "list": {},
+            "list": [],
+            "details": {},
+            "best_wells": {},
             "summary": {},
-            "best": {}
         },
         "well": {
             "list": [],
@@ -30,6 +32,10 @@ class LibWellProduction:
     KEY_POTENTIAL_OIL = "potential_oil_(bbl)_"
     KEY_POTENTIAL_WATER = "potential_water_(bbl)_"
     KEY_POTENTIAL_GAS = "potential_gas_(mcf)_"
+    KEY_REGION_TYPE = "region_type"
+    GROUP_TYPE_REGION = "region"
+    GROUP_TYPE_PLATFORM = "platform"
+    GROUP_TYPE_WELL = "well"
 
     def create_well_summary(self, df, group_by=None, key_region=None, key_platform=None):
         grouped = df.groupby(group_by)
@@ -56,7 +62,8 @@ class LibWellProduction:
             actual_water = [group[self.KEY_ACTUAL_WATER].min(), group[self.KEY_ACTUAL_WATER].max(), group[self.KEY_ACTUAL_WATER].sum()]
             actual_gas = [group[self.KEY_ACTUAL_GAS].min(), group[self.KEY_ACTUAL_GAS].max(), group[self.KEY_ACTUAL_GAS].sum()]
             potential_oil = [group[self.KEY_POTENTIAL_OIL].min(), group[self.KEY_POTENTIAL_OIL].max(), group[self.KEY_POTENTIAL_OIL].sum()]
-            potential_water = [group[self.KEY_POTENTIAL_WATER].min(), group[self.KEY_POTENTIAL_WATER].max(), group[self.KEY_POTENTIAL_WATER].sum()]
+            potential_water = [group[self.KEY_POTENTIAL_WATER].min(), group[self.KEY_POTENTIAL_WATER].max(),
+                               group[self.KEY_POTENTIAL_WATER].sum()]
             potential_gas = [group[self.KEY_POTENTIAL_GAS].min(), group[self.KEY_POTENTIAL_GAS].max(), group[self.KEY_POTENTIAL_GAS].sum()]
 
             # Add platform details to the summary
@@ -105,7 +112,7 @@ class LibWellProduction:
             }
         return data_list, data_summary
 
-    def create_data_summary(self, dict_summary, group_by=None):
+    def create_data_summary(self, dict_summary, group_by=None, group_type=None):
         summary = {}
         for item in dict_summary.values():
             selected = item[group_by]
@@ -114,8 +121,10 @@ class LibWellProduction:
                     "name": selected,
                     self.KEY_REGION: item[self.KEY_REGION],
                     self.KEY_PLATFORM: item[self.KEY_PLATFORM],
+                    self.KEY_REGION_TYPE: group_type,
                     "total_wells": 0,
                     "total_platform": 0,
+                    "total_region": 0,
                     "isGasActive": 0,
                     "isOilActive": 0,
                     "isWaterActive": 0,
@@ -151,10 +160,17 @@ class LibWellProduction:
             else:
                 summary[selected]["total_wells"] += 1
                 summary[selected]["total_platform"] = 1
+
             if "total_platform" in item:
                 summary[selected]["total_platform"] += item["total_platform"]
             else:
                 summary[selected]["total_platform"] = 1
+
+            if (group_by == self.KEY_REGION_TYPE) and (group_type == self.GROUP_TYPE_REGION):
+                summary[selected]["total_region"] += 1
+            else:
+                summary[selected]["total_region"] = 1
+
             summary[selected]["isGasActive"] += item["isGasActive"]
             summary[selected]["isOilActive"] += item["isOilActive"]
             summary[selected]["isWaterActive"] += item["isWaterActive"]
@@ -213,29 +229,29 @@ class LibWellProduction:
                 summary[selected]["data"][key][self.KEY_POTENTIAL_OIL] += item["data"][key][self.KEY_POTENTIAL_OIL]
                 summary[selected]["data"][key][self.KEY_POTENTIAL_WATER] += item["data"][key][self.KEY_POTENTIAL_WATER]
 
-        data_list = []
-        for item in summary.values():
-            data_list.append(
-                {
-                    "name": item["name"],
-                    "region": item["region"],
-                    # "platform_name": item["platform_name"],
-                    "isOilActive": item["isOilActive"],
-                    "isGasActive": item["isGasActive"],
-                    "isWaterActive": item["isWaterActive"],
-                    "total_wells": item["total_wells"],
-                    "total_platform": item["total_platform"],
-                })
+        # data_list = []
+        # for item in summary.values():
+        #     data_list.append(
+        #         {
+        #             "name": item["name"],
+        #             "region": item["region"],
+        #             # "platform_name": item["platform_name"],
+        #             "isOilActive": item["isOilActive"],
+        #             "isGasActive": item["isGasActive"],
+        #             "isWaterActive": item["isWaterActive"],
+        #             "total_wells": item["total_wells"],
+        #             "total_platform": item["total_platform"],
+        #         })
 
-        return data_list, summary
+        return summary
 
     def create_best_data_summary_by_key(self, data_summary, key_item, n=5):
         sorted_data = sorted(data_summary.items(), key=lambda x: x[1]['total'][key_item], reverse=True)
         data = dict(sorted_data[:n])
 
         # Select only "key1" and "key3" for each "total"
-        filtered_data = {
-            k: {
+        filtered_data = [
+            {
                 "name": v["name"],
                 "region": v["region"],
                 "platform_name": v["platform_name"],
@@ -243,11 +259,11 @@ class LibWellProduction:
                                                            self.KEY_POTENTIAL_OIL, self.KEY_POTENTIAL_WATER, self.KEY_POTENTIAL_GAS]}
             }
             for k, v in data.items()
-        }
+        ]
         return filtered_data
 
     def get_summary_without_data_key(self, data_summary):
-        return {k: {inner_k: inner_v for inner_k, inner_v in v.items() if inner_k != "data"} for k, v in data_summary.items()}
+        return [{k: v for k, v in value.items() if k != "data"} for value in data_summary.values()]
 
     def create_best_data_summary(self, data_summary, n=5):
         return ({
@@ -276,14 +292,22 @@ class LibWellProduction:
         # --------------------------------------------------------------------------------
         # Create Platform summary
         # --------------------------------------------------------------------------------
-        platform_list, platform_summary = self.create_data_summary(wells_summary, group_by=self.KEY_PLATFORM)
+        platform_details = self.create_data_summary(wells_summary, group_by=self.KEY_PLATFORM, group_type=self.GROUP_TYPE_PLATFORM)
         best_wells_by_platform = self.create_best_data_summary(wells_summary, n=5)
+        platform_summary = {}
 
         # --------------------------------------------------------------------------------
         # Create Region summary
         # --------------------------------------------------------------------------------
-        region_list, region_summary = self.create_data_summary(platform_summary, group_by=self.KEY_REGION)
-        best_platforms_by_region = self.create_best_data_summary(platform_summary, n=5)
+        region_details = self.create_data_summary(platform_details, group_by=self.KEY_REGION, group_type=self.GROUP_TYPE_REGION)
+        best_platforms_by_region = self.create_best_data_summary(platform_details, n=5)
+        region_summary = self.create_data_summary(region_details, group_by=self.KEY_REGION_TYPE, group_type=self.GROUP_TYPE_REGION)
+
+        # --------------------------------------------------------------------------------
+        # Create Total summary
+        # --------------------------------------------------------------------------------
+        # total_list, total_summary = self.create_data_summary(region_summary, group_by=self.KEY_REGION)
+        # print(total_summary)
 
         # --------------------------------------------------------------------------------
         # FILL THE DATA
@@ -293,42 +317,53 @@ class LibWellProduction:
             "summary": wells_summary,
         }
         self.data["platform"] = {
-            "list": self.get_summary_without_data_key(platform_summary),
+            "list": self.get_summary_without_data_key(platform_details),
+            "details": platform_details,
             "summary": platform_summary,
-            "best": best_wells_by_platform,
+            "best_wells": best_wells_by_platform,
         }
         self.data["region"] = {
-            "list": self.get_summary_without_data_key(region_summary),
+            "list": self.get_summary_without_data_key(region_details),
+            "details": region_details,
             "summary": region_summary,
-            "best": best_platforms_by_region,
+            "best_platform": best_platforms_by_region,
         }
+
+    # ------------------------------ REGION -----------------------------
+    def get_region_summary(self):
+        return self.data["region"]["summary"]
 
     def get_region_list(self):
         return self.data["region"]["list"]
 
     def get_region_open(self, region_name):
-        if region_name not in self.data["region"]["summary"]:
+        if region_name not in self.data["region"]["details"]:
             return None
         else:
-            selected = self.data["region"]["summary"][region_name]
+            selected = self.data["region"]["details"][region_name]
             return selected
 
-    def get_region_best(self):
-        return self.data["region"]["best"]
+    def get_region_best_platform(self):
+        return self.data["region"]["best_platform"]
+
+    # ------------------------------ PLATFORM -----------------------------
+    def get_platform_summary(self):
+        return self.data["platform"]["summary"]
 
     def get_platform_list(self):
         return self.data["platform"]["list"]
 
     def get_platform_open(self, platform_name):
-        if platform_name not in self.data["platform"]["summary"]:
+        if platform_name not in self.data["platform"]["details"]:
             return None
         else:
-            selected = self.data["platform"]["summary"][platform_name]
+            selected = self.data["platform"]["details"][platform_name]
             return selected
 
-    def get_platform_best(self):
-        return self.data["platform"]["best"]
+    def get_platform_best_wells(self):
+        return self.data["platform"]["best_wells"]
 
+    # ------------------------------ WELLS -----------------------------
     def get_wells_list(self):
         return self.data["wells"]["list"]
 

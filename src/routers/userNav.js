@@ -1,6 +1,7 @@
 import {LuGlobe} from "react-icons/lu";
 import {TbFileReport} from "react-icons/tb";
 import {AppRoutes} from "./router.js";
+import { MdOutlineOilBarrel } from "react-icons/md";
 
 const iconClassName = "text-2xl";
 export const AppNavigation = [
@@ -19,6 +20,15 @@ export const AppNavigation = [
       {...AppRoutes.potentialOil, component: "item"},
       {...AppRoutes.potentialGas, component: "item"},
       {...AppRoutes.oilLosses, component: "item"},
+    ]
+  },
+  {
+    component: "group",
+    name: "Wells Production",
+    to: "/base",
+    icon: <MdOutlineOilBarrel className={iconClassName}/>,
+    items: [
+      {...AppRoutes.wellProd2024.actualOil, component: "item"},
     ]
   },
   {...AppRoutes.productionData, component: "item"},

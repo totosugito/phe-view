@@ -10,10 +10,10 @@ import {useTranslation} from "react-i18next";
 
 const TabAreaSummary = memo(({values, totalDaily}) => {
     const {t} = useTranslation();
-    const styleRowGroup = "grid md:grid-cols-2 grid-cols-1 gap-3";
+    const styleRowGroup = "grid md:grid-cols-2 grid-cols-1 gap-2";
 
     return (
-        <div className={"flex flex-col gap-3 w-full h-full"}>
+        <div className={"flex flex-col gap-2 w-full h-full"}>
             <AreaCardSummary values={values}/>
             <div>
                 <ChartLinesView values={totalDaily ?? []}
