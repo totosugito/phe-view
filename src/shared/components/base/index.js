@@ -10,6 +10,7 @@ import WebLoading from "./WebLoading.jsx";
 import WebLogo from "./WebLogo.jsx";
 import CardLayout from "./CardLayout.jsx";
 import BodyContents from "./BodyContents.jsx";
+import CardStats from "./CardStats.jsx";
 
 export {
   AppSidebar,
@@ -23,6 +24,7 @@ export {
   WebLoading,
   WebLogo,
   CardLayout,
-  BodyContents
+  BodyContents,
+  CardStats
 }
 

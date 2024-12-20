@@ -1,7 +1,7 @@
 import {useTranslation} from "react-i18next";
 import {twMerge} from "tailwind-merge";
 
-const RowsPerPage = ({table, rowsPerPage, setRowsPerPage, pageList=[5,10,15,20], props}) => {
+const RowsPerPage = ({table, rowsPerPage, setRowsPerPage, pageList=[5,10,15,20,50,100], props}) => {
     const {t} = useTranslation();
     return (
         <div className={twMerge("flex gap-2 items-center", props?.styleContainer)}>

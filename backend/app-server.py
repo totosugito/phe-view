@@ -1,7 +1,10 @@
-from flask import Flask,  jsonify
+import os
+
+from flask import Flask, jsonify, send_from_directory
 from flask_cors import CORS
 from flask_compress import Compress
 
+from lib.LibUtils import LibUtils
 from lib.LibWellProduction import LibWellProduction
 
 app = Flask(__name__)
@@ -14,17 +17,34 @@ CORS(app, resources={r"/*": {"origins": "*"}})  # Disable CORS for all routes
 app.config['CORS_HEADERS'] = 'Content-Type'
 
 # excelFileName = "./data/Demo.xlsx"
-# excelFileName = "./data/Daily_Production_Volume_By_WELLS_Jan-Dec2024_Cleaned-MINI.xlsx"
-excelFileName = "./data/Daily_Production_Volume_By_WELLS_Jan-Dec2024_Cleaned.xlsx"
+excelWellProduction = "./data/report/Daily_Production_Volume_By_WELLS_Jan-Dec2024_Cleaned-MINI.xlsx"
+# excelWellProduction = "./data/report/Daily_Production_Volume_By_WELLS_Jan-Dec2024_Cleaned.xlsx"
+
+msgFileDir = "./data/msg"
 baseApiWellsProd2024 = "/api/wells-prod2024"
 
 # Load the data
-lib_well_production = LibWellProduction(excel_file_name=excelFileName)
+lib_well_production = LibWellProduction(excel_file_name=excelWellProduction)
 
 
 @app.route('/')
 def hello_world():  # put application's code here
     return 'App Server is running!'
+
+
+# ------------------------------ MSG FILE -----------------------------
+@app.route(baseApiWellsProd2024 + '/msg/list', methods=['GET'])
+def get_msg_list():
+    file_list = LibUtils.get_list_file(msgFileDir)
+    return jsonify({"success": True, "data": sorted(file_list, key=lambda x: x['filename'])}), 200
+
+
+@app.route('/data/msg/<filename>', methods=['GET'])
+def serve_file(filename):
+    try:
+        return send_from_directory(msgFileDir, filename, as_attachment=True)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 404
 
 
 # ------------------------------ REGION -----------------------------

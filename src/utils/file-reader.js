@@ -55,7 +55,7 @@ export function msgInfoToHtml(msgInfo) {
     const ccRecipients = msgInfo?.recipients.filter(recipient => recipient.recipType === 'cc').map(recipient =>
         `${recipient.name} &lt;<a href="mailto:${recipient.smtpAddress}">${recipient.smtpAddress}</a>&gt;`).join(', ');
     const emailHeader = `<div class="flex flex-col mb-4 gap-y-3">
-					<div class="text-neutral-800"><strong>From:</strong> ${msgInfo.senderName} &lt;${msgInfo.senderEmail}&gt;</div>
+					<div class="text-neutral-800"><strong>From:</strong> ${msgInfo.senderName} &lt;<a href="mailto:${msgInfo.senderEmail}">${msgInfo.senderEmail}</a>&gt;</div>
 					${toRecipients ? `<div class="text-neutral-800"><strong>To:</strong> ${toRecipients}</div>` : ''}
 					${ccRecipients ? `<div class="text-neutral-800"><strong>CC:</strong> ${ccRecipients}</div>` : ''}
 					<div class="text-neutral-800"><strong>Subject:</strong> ${msgInfo.subject}</div>

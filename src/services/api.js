@@ -1,22 +1,24 @@
-const APP_BASE_URL = import.meta.env.VITE_APP_BASE_URL
-
-const baseWellsProd2024 = "/wells-prod2024"
+export const APP_BASE_URL = import.meta.env.VITE_APP_BASE_URL
+const API_PATH = APP_BASE_URL + "/api/wells-prod2024"
 export const AppApi = {
-  wellProd2024: {
-    region: {
-      list: APP_BASE_URL + baseWellsProd2024 + "/region/list",
-      summary: APP_BASE_URL + baseWellsProd2024 + "/region/summary",
-      open: APP_BASE_URL + baseWellsProd2024 + "/region/open",
-      bestByPlatform: APP_BASE_URL + baseWellsProd2024 + "/region/best-platform",
+    wellProd2024: {
+        region: {
+            list: API_PATH + "/region/list",
+            summary: API_PATH + "/region/summary",
+            open: API_PATH + "/region/open",
+            bestByPlatform: API_PATH + "/region/best-platform",
+        },
+        platform: {
+            list: API_PATH + "/platform/list",
+            open: API_PATH + "/platform/open",
+            bestByWells: API_PATH + "/platform/best-wells",
+        },
+        wells: {
+            list: API_PATH + "/wells/list",
+            open: API_PATH + "/wells/open",
+        },
     },
-    platform: {
-      list: APP_BASE_URL + baseWellsProd2024 + "/platform/list",
-      open: APP_BASE_URL + baseWellsProd2024 + "/platform/open",
-      bestByWells: APP_BASE_URL + baseWellsProd2024 + "/platform/best-wells",
-    },
-    wells: {
-      list: APP_BASE_URL + baseWellsProd2024 + "/wells/list",
-      open: APP_BASE_URL + baseWellsProd2024 + "/wells/open",
+    msgFiles: {
+        list: API_PATH + "/msg/list",
     }
-  },
 }

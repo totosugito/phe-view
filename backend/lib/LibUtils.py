@@ -1,3 +1,6 @@
+import os
+from datetime import datetime
+
 import pandas as pd
 
 
@@ -24,3 +27,20 @@ class LibUtils:
             df["date"] = df["date"].dt.strftime('%Y-%m-%d')  # Format to yyyy-MM-dd
 
         return df
+
+    @staticmethod
+    def get_list_file(directory):
+        files = []
+        for filename in os.listdir(directory):
+            filepath = os.path.join(directory, filename)
+            if os.path.isfile(filepath):
+                file_info = {
+                    "filename": filename,
+                    "size": os.path.getsize(filepath),
+                    "last_update": datetime.fromtimestamp(os.path.getmtime(filepath)).strftime('%Y-%m-%d %H:%M:%S'),
+                    "url": f"{directory.replace('.', '')}/{filename}"
+
+                }
+                files.append(file_info)
+
+        return files

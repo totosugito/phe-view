@@ -1,3 +1,5 @@
+from copy import deepcopy
+
 from lib.LibUtils import LibUtils
 
 
@@ -53,9 +55,15 @@ class LibWellProduction:
             group_data = dt_unique.set_index('date').to_dict(orient='index')
 
             last_row = group.iloc[-1]  # Using
-            is_oil_active = (last_row[self.KEY_ACTUAL_OIL] > 0) | (last_row[self.KEY_POTENTIAL_OIL] > 0)
-            is_gas_active = (last_row[self.KEY_ACTUAL_GAS] > 0) | (last_row[self.KEY_POTENTIAL_GAS] > 0)
-            is_water_active = (last_row[self.KEY_ACTUAL_WATER] > 0) | (last_row[self.KEY_POTENTIAL_WATER] > 0)
+            is_oil_active = ((last_row[self.KEY_ACTUAL_OIL] > 0) | (last_row[self.KEY_POTENTIAL_OIL] > 0))
+            is_gas_active = ((last_row[self.KEY_ACTUAL_GAS] > 0) | (last_row[self.KEY_POTENTIAL_GAS] > 0))
+            is_water_active = ((last_row[self.KEY_ACTUAL_WATER] > 0) | (last_row[self.KEY_POTENTIAL_WATER] > 0))
+            active_oil_count = int(is_oil_active)
+            active_gas_count = int(is_gas_active)
+            active_water_count = int(is_water_active)
+            inactive_oil_count = int(~is_oil_active)
+            inactive_gas_count = int(~is_gas_active)
+            inactive_water_count = int(~is_water_active)
 
             n_data = len(group)
             actual_oil = [group[self.KEY_ACTUAL_OIL].min(), group[self.KEY_ACTUAL_OIL].max(), group[self.KEY_ACTUAL_OIL].sum()]
@@ -70,9 +78,12 @@ class LibWellProduction:
             data_list.append(
                 {
                     "name": group_key,
-                    "isOilActive": int(is_oil_active.astype(int)),
-                    "isGasActive": int(is_gas_active.astype(int)),
-                    "isWaterActive": int(is_water_active.astype(int)),
+                    "activeOilCount": active_oil_count,
+                    "activeWaterCount": active_water_count,
+                    "activeGasCount": active_gas_count,
+                    "inActiveOilCount": inactive_oil_count,
+                    "inActiveWaterCount": inactive_water_count,
+                    "inActiveGasCount": inactive_gas_count,
                 })
             data_summary[group_key] = {
                 "name": group_key,
@@ -81,9 +92,12 @@ class LibWellProduction:
                 "idxStart": int(idx_start),
                 "idxEnd": int(idx_end),
                 "ndata": n_data,
-                "isOilActive": int(is_oil_active.astype(int)),
-                "isGasActive": int(is_gas_active.astype(int)),
-                "isWaterActive": int(is_water_active.astype(int)),
+                "activeOilCount": active_oil_count,
+                "activeWaterCount": active_water_count,
+                "activeGasCount": active_gas_count,
+                "inActiveOilCount": inactive_oil_count,
+                "inActiveWaterCount": inactive_water_count,
+                "inActiveGasCount": inactive_gas_count,
                 "min": {
                     self.KEY_ACTUAL_OIL: float(actual_oil[0]),
                     self.KEY_ACTUAL_WATER: float(actual_water[0]),
@@ -125,9 +139,12 @@ class LibWellProduction:
                     "total_wells": 0,
                     "total_platform": 0,
                     "total_region": 0,
-                    "isGasActive": 0,
-                    "isOilActive": 0,
-                    "isWaterActive": 0,
+                    "activeOilCount": 0,
+                    "activeWaterCount": 0,
+                    "activeGasCount": 0,
+                    "inActiveOilCount": 0,
+                    "inActiveWaterCount": 0,
+                    "inActiveGasCount": 0,
                     "data": {},
                     "min": {
                         self.KEY_ACTUAL_OIL: 0,
@@ -171,9 +188,12 @@ class LibWellProduction:
             else:
                 summary[selected]["total_region"] = 1
 
-            summary[selected]["isGasActive"] += item["isGasActive"]
-            summary[selected]["isOilActive"] += item["isOilActive"]
-            summary[selected]["isWaterActive"] += item["isWaterActive"]
+            summary[selected]["activeOilCount"] += item["activeOilCount"]
+            summary[selected]["activeWaterCount"] += item["activeWaterCount"]
+            summary[selected]["activeGasCount"] += item["activeGasCount"]
+            summary[selected]["inActiveOilCount"] += item["inActiveOilCount"]
+            summary[selected]["inActiveWaterCount"] += item["inActiveWaterCount"]
+            summary[selected]["inActiveGasCount"] += item["inActiveGasCount"]
 
             cur_key = "min"
             summary[selected][cur_key][self.KEY_ACTUAL_OIL] = min(summary[selected][cur_key][self.KEY_ACTUAL_OIL],
@@ -228,20 +248,6 @@ class LibWellProduction:
                 summary[selected]["data"][key][self.KEY_POTENTIAL_GAS] += item["data"][key][self.KEY_POTENTIAL_GAS]
                 summary[selected]["data"][key][self.KEY_POTENTIAL_OIL] += item["data"][key][self.KEY_POTENTIAL_OIL]
                 summary[selected]["data"][key][self.KEY_POTENTIAL_WATER] += item["data"][key][self.KEY_POTENTIAL_WATER]
-
-        # data_list = []
-        # for item in summary.values():
-        #     data_list.append(
-        #         {
-        #             "name": item["name"],
-        #             "region": item["region"],
-        #             # "platform_name": item["platform_name"],
-        #             "isOilActive": item["isOilActive"],
-        #             "isGasActive": item["isGasActive"],
-        #             "isWaterActive": item["isWaterActive"],
-        #             "total_wells": item["total_wells"],
-        #             "total_platform": item["total_platform"],
-        #         })
 
         return summary
 
@@ -331,7 +337,16 @@ class LibWellProduction:
 
     # ------------------------------ REGION -----------------------------
     def get_region_summary(self):
-        return self.data["region"]["summary"]
+        copied_data = {key: value for key, value in self.data["region"]["summary"]["region"].items() if key != "data"}
+        data_ = self.data["region"]["summary"]["region"]["data"]
+        # Create a new array from the original data without altering it
+        array_ = sorted(
+            [{"date": date, **info} for date, info in deepcopy(data_).items()],
+            key=lambda x: x["date"]
+        )
+        copied_data["data"] = array_
+        return copied_data
+        # return self.data["region"]["summary"]
 
     def get_region_list(self):
         return self.data["region"]["list"]
